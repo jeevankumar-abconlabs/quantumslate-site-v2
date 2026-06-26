@@ -3,10 +3,12 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stage, useAnimations, useGLTF } from "@react-three/drei";
+import { LoopRepeat } from "three";
 import type { Group } from "three";
 
 const MODEL = "/3d-models/drone/scene.gltf";
 const BIND_Y = 5; // the "Center" joint's bind-pose Y
+const CLIP = "hover"; // revert to "hover" to restore the idle hover
 
 function Drone({ animate }: { animate: boolean }) {
   const group = useRef<Group>(null);
@@ -36,10 +38,16 @@ function Drone({ animate }: { animate: boolean }) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    const action = actions["hover"]; // baked idle animation
+    const action = actions[CLIP];
     if (!action) return;
-    if (animate) action.reset().fadeIn(0.4).play();
-    else action.stop();
+    if (animate) {
+      action.reset();
+      action.setLoop(LoopRepeat, Infinity); // loop continuously
+      action.clampWhenFinished = false;
+      action.fadeIn(0.4).play();
+    } else {
+      action.stop();
+    }
     return () => {
       action.fadeOut(0.4);
     };
@@ -69,7 +77,7 @@ export default function DroneModel() {
     <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 6], fov: 40 }}>
       <Suspense fallback={null}>
         {/* Stage auto-frames and lights the model, so it stays centred at any screen size. */}
-        <Stage environment="city" intensity={0.4} adjustCamera={1.1} shadows="contact">
+        <Stage environment="city" intensity={0.4} adjustCamera={1.1} shadows={false}>
           <Drone animate={animate} />
         </Stage>
       </Suspense>
