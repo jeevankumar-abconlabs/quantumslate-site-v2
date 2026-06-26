@@ -2,9 +2,9 @@
 
 import dynamic from "next/dynamic";
 
-// Three.js needs the browser (WebGL), so render it client-side only.
-const DroneModel = dynamic(() => import("./DroneModel"), { ssr: false });
+// Three.js + Theatre need the browser, so render the whole hero client-side only.
+const Hero = dynamic(() => import("./Hero"), { ssr: false });
 
 export default function DroneScene() {
-  return <DroneModel />;
+  return <Hero />;
 }
