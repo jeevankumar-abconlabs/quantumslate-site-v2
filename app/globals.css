@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
+/* Royal palette: solid premium colours only, no gradients.
+   Ivory background, royal navy accent, near-black text. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f1e8; /* ivory */
+  --foreground: #111111; /* black text */
+  --navy: #14274e;       /* royal navy accent */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-navy: var(--navy);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Theme locked to ivory across the whole site (no dark-mode flip). */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
