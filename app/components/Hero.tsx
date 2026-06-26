@@ -74,11 +74,7 @@ export default function Hero() {
   }, [assetsReady]);
 
   return (
-    <div
-      className={`relative h-[100dvh] w-full overflow-hidden bg-background ${
-        crashed && !revealed ? "animate-crash-shake" : ""
-      }`}
-    >
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-background">
       {/* Faint engineering grid, fading out toward the edges. */}
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.12)_1px,transparent_1px)] bg-[size:clamp(36px,6vw,64px)_clamp(36px,6vw,64px)] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]"

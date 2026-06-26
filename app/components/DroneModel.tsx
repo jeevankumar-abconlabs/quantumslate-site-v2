@@ -36,9 +36,9 @@ function rebaseHover(animations: AnimationClip[]) {
 // Keep the drone a sensible fraction of the screen across viewports: shrink it on
 // narrow phones (where a fixed world-size drone would dominate), cap it on desktop.
 // ponytail: width-based heuristic; tune the divisor/clamp if framing feels off.
-function useResponsiveScale() {
+function useResponsiveScale(floor = 0.68) {
   const width = useThree((s) => s.viewport.width);
-  return Math.min(0.9, Math.max(0.68, width / 11));
+  return Math.min(0.9, Math.max(floor, width / 11));
 }
 
 function useHover(group: React.RefObject<Group | null>, animations: AnimationClip[]) {
@@ -95,7 +95,7 @@ function HeroDrone() {
   }, [scene]);
 
   useHover(group, animations);
-  const scale = useResponsiveScale();
+  const scale = useResponsiveScale(0.82); // bigger floor so the hero drone reads well on phones
 
   // Light parallax: ease a small tilt toward the pointer (bones drive the hover,
   // so the group's own rotation is free to use). ponytail: ±0.15rad feels alive
