@@ -22,6 +22,7 @@ const NAV_LINKS = [
 
 export default function Hero() {
   const [revealed, setRevealed] = useState(false);
+  const [crashed, setCrashed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   // Gate the intro on the drone + HDRI actually finishing, so the fly-in never
   // plays against a blank screen. drei tracks every loader in one global store.
@@ -52,28 +53,49 @@ export default function Hero() {
       return;
     }
     let cancelled = false;
+    let revealTimer: ReturnType<typeof setTimeout>;
     project.ready.then(() => {
-      // Play the authored drone intro once, then reveal the site when it lands.
+      // Play the authored drone intro once. When the drone crashes, shake +
+      // cut to black, hold a beat, then reveal the site.
       sheet.sequence.play({ range: [0, 2.933] }).then((finished) => {
-        if (finished && !cancelled) {
-          setRevealed(true);
+        if (!finished || cancelled) return;
+        setCrashed(true); // triggers the shake + black flash
+        revealTimer = setTimeout(() => {
+          if (cancelled) return;
+          setRevealed(true); // black fades out, site fades in
           playHero();
-        }
+        }, 850);
       });
     });
     return () => {
       cancelled = true;
+      clearTimeout(revealTimer);
     };
   }, [assetsReady]);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background">
+    <div
+      className={`relative h-[100dvh] w-full overflow-hidden bg-background ${
+        crashed && !revealed ? "animate-crash-shake" : ""
+      }`}
+    >
       {/* Faint engineering grid, fading out toward the edges. */}
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.12)_1px,transparent_1px)] bg-[size:clamp(36px,6vw,64px)_clamp(36px,6vw,64px)] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]"
       />
 
       <DroneModel revealed={revealed} />
+
+      {/* Crash cut-to-black: snaps in as the drone hits, holds, then fades to reveal the site. */}
+      {crashed && (
+        <div
+          className={`pointer-events-none absolute inset-0 z-40 bg-black ${
+            revealed
+              ? "opacity-0 transition-opacity duration-700 ease-out"
+              : "opacity-100 transition-opacity duration-150 ease-in"
+          }`}
+        />
+      )}
 
       {/* Preloader: covers the scene until assets are in, then fades as the drone flies in. */}
       {!STUDIO_ENABLED && (
