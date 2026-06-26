@@ -7,6 +7,11 @@ export const STUDIO_ENABLED =
   process.env.NODE_ENV === "development" &&
   process.env.NEXT_PUBLIC_THEATRE_STUDIO === "1";
 
+// Which drone Studio shows for authoring: "intro" (the fly-in) or "hero" (resting).
+// Set NEXT_PUBLIC_THEATRE_TARGET=intro in .env to edit the intro animation.
+export const STUDIO_TARGET =
+  process.env.NEXT_PUBLIC_THEATRE_TARGET === "intro" ? "intro" : "hero";
+
 // Theatre Studio (the visual editor) loads dynamically and only once, so its bundle
 // never ships to production and HMR doesn't double-register it.
 if (typeof window !== "undefined" && STUDIO_ENABLED) {

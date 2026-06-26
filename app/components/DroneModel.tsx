@@ -7,7 +7,7 @@ import { Box3, LoopRepeat, Vector3 } from "three";
 import type { AnimationClip, Group } from "three";
 import { clone as skeletonClone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
-import { sheet, STUDIO_ENABLED } from "../theatre/drone";
+import { sheet, STUDIO_ENABLED, STUDIO_TARGET } from "../theatre/drone";
 import { heroSheet } from "../theatre/hero";
 
 const MODEL = "/3d-models/drone/scene.gltf";
@@ -117,9 +117,9 @@ function HeroDrone() {
 useGLTF.preload(MODEL);
 
 export default function DroneModel({ revealed }: { revealed: boolean }) {
-  // In editor mode, show the hero drone so it can be authored.
-  const showIntro = !revealed && !STUDIO_ENABLED;
-  const showHero = revealed || STUDIO_ENABLED;
+  // In editor mode, show whichever drone is being authored (NEXT_PUBLIC_THEATRE_TARGET).
+  const showIntro = STUDIO_ENABLED ? STUDIO_TARGET === "intro" : !revealed;
+  const showHero = STUDIO_ENABLED ? STUDIO_TARGET === "hero" : revealed;
 
   return (
     <Canvas dpr={[1, 2]}>

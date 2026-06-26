@@ -54,7 +54,7 @@ export default function Hero() {
     let cancelled = false;
     project.ready.then(() => {
       // Play the authored drone intro once, then reveal the site when it lands.
-      sheet.sequence.play({ range: [0, 6.9] }).then((finished) => {
+      sheet.sequence.play({ range: [0, 2.933] }).then((finished) => {
         if (finished && !cancelled) {
           setRevealed(true);
           playHero();
