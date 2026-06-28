@@ -20,12 +20,12 @@ function reveal(setRevealed: (v: boolean) => void) {
 }
 
 export default function Hero() {
-  const [revealed, setRevealed] = useState(false);
+  const [revealed, setRevealed] = useState(introState.played);
   const [crashed, setCrashed] = useState(false);
   // Gate the intro on the drone + HDRI actually finishing, so the fly-in never
   // plays against a blank screen. drei tracks every loader in one global store.
   const { active, progress } = useProgress();
-  const [assetsReady, setAssetsReady] = useState(false);
+  const [assetsReady, setAssetsReady] = useState(introState.played);
 
   useEffect(() => {
     if (!active && progress === 100) setAssetsReady(true);
@@ -34,11 +34,16 @@ export default function Hero() {
   // Safety net: never trap the user behind a stuck loader if an asset stalls.
   // ponytail: 12s ceiling; raise it if real-world loads legitimately run longer.
   useEffect(() => {
+    if (introState.played) return;
     const t = setTimeout(() => setAssetsReady(true), 12000);
     return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
+    if (introState.played) {
+      playHero();
+      return;
+    }
     // Editor mode: let Studio drive the timeline; don't auto-play or reveal the overlay.
     if (STUDIO_ENABLED) return;
     // Wait until the model is loaded so the entrance animates the real drone.
@@ -92,7 +97,7 @@ export default function Hero() {
       )}
 
       {/* Preloader: covers the scene until assets are in, then fades as the drone flies in. */}
-      {!STUDIO_ENABLED && (
+      {!STUDIO_ENABLED && !introState.played && (
         <div
           className={`absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-background transition-opacity duration-700 ease-out ${
             assetsReady ? "pointer-events-none opacity-0" : "opacity-100"
