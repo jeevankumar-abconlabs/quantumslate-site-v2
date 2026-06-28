@@ -9,7 +9,11 @@ import { introState } from "../introState";
 
 // Play the hero drone's authored entrance (if any) once the site is revealed.
 function playHero() {
-  heroProject.ready.then(() => heroSheet.sequence.play());
+  heroProject.ready.then(() => {
+    heroSheet.sequence.pause();
+    heroSheet.sequence.position = 0;
+    heroSheet.sequence.play({ iterationCount: Infinity });
+  });
 }
 
 // Tell the global Navbar the hero is on screen so it can fade in.
@@ -26,6 +30,13 @@ export default function Hero() {
   // plays against a blank screen. drei tracks every loader in one global store.
   const { active, progress } = useProgress();
   const [assetsReady, setAssetsReady] = useState(introState.played);
+
+  // Pause the hero sequence on unmount to release resources and reset state.
+  useEffect(() => {
+    return () => {
+      heroSheet.sequence.pause();
+    };
+  }, []);
 
   useEffect(() => {
     if (!active && progress === 100) setAssetsReady(true);
@@ -73,6 +84,7 @@ export default function Hero() {
     return () => {
       cancelled = true;
       clearTimeout(revealTimer);
+      sheet.sequence.pause();
     };
   }, [assetsReady]);
 
