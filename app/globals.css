@@ -14,6 +14,7 @@
   --color-navy: var(--navy);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-unbounded: var(--font-unbounded);
 }
 
 /* Theme locked to ivory across the whole site (no dark-mode flip). */

@@ -5,25 +5,23 @@ import { useProgress } from "@react-three/drei";
 import DroneModel from "./DroneModel";
 import { project, sheet, STUDIO_ENABLED } from "../theatre/drone";
 import { heroProject, heroSheet } from "../theatre/hero";
+import { introState } from "../introState";
 
 // Play the hero drone's authored entrance (if any) once the site is revealed.
 function playHero() {
   heroProject.ready.then(() => heroSheet.sequence.play());
 }
 
-const NAV_LINKS = [
-  "About",
-  "Workshops",
-  "Competitions",
-  "Services",
-  "Contact",
-  "Defence",
-];
+// Tell the global Navbar the hero is on screen so it can fade in.
+function reveal(setRevealed: (v: boolean) => void) {
+  introState.played = true;
+  setRevealed(true);
+  window.dispatchEvent(new Event("hero:revealed"));
+}
 
 export default function Hero() {
   const [revealed, setRevealed] = useState(false);
   const [crashed, setCrashed] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   // Gate the intro on the drone + HDRI actually finishing, so the fly-in never
   // plays against a blank screen. drei tracks every loader in one global store.
   const { active, progress } = useProgress();
@@ -48,7 +46,7 @@ export default function Hero() {
 
     // Reduced motion: skip the fly-in and show the site immediately.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setRevealed(true);
+      reveal(setRevealed);
       playHero();
       return;
     }
@@ -62,7 +60,7 @@ export default function Hero() {
         setCrashed(true); // triggers the shake + black flash
         revealTimer = setTimeout(() => {
           if (cancelled) return;
-          setRevealed(true); // black fades out, site fades in
+          reveal(setRevealed); // black fades out, site fades in
           playHero();
         }, 850);
       });
@@ -133,84 +131,6 @@ export default function Hero() {
           </span>
         </div>
       )}
-
-      {/* Floating, rounded, blurred navbar (Apple-style). */}
-      <header
-        className={`absolute inset-x-0 top-4 z-10 flex justify-center px-4 transition-all duration-700 ease-out ${
-          revealed
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-2 opacity-0"
-        }`}
-      >
-        <nav className="flex h-14 w-full items-center justify-between rounded-full border border-navy/10 bg-background/55 px-6 shadow-[0_8px_30px_rgba(20,39,78,0.08)] backdrop-blur-xl md:w-auto md:justify-start md:gap-8">
-          <span className="text-base font-semibold tracking-tight text-navy">
-            QuantumSlate
-          </span>
-          <ul className="hidden items-center gap-7 text-sm text-navy/90 md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a href="#" className="transition-colors hover:text-navy">
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-          {/* Hamburger: mobile only */}
-          <button
-            type="button"
-            aria-label="Open menu"
-            onClick={() => setMenuOpen(true)}
-            className="text-navy md:hidden"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="7" x2="21" y2="7" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="17" x2="21" y2="17" />
-            </svg>
-          </button>
-        </nav>
-      </header>
-
-      {/* Sliding mobile menu */}
-      <div
-        className={`fixed inset-0 z-20 flex flex-col bg-background px-8 py-7 text-navy transition-transform duration-500 ease-out md:hidden ${
-          menuOpen ? "translate-x-0" : "pointer-events-none translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold tracking-tight">
-            QuantumSlate
-          </span>
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-            className="text-navy"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="6" y1="6" x2="18" y2="18" />
-              <line x1="18" y1="6" x2="6" y2="18" />
-            </svg>
-          </button>
-        </div>
-        <ul className="mt-12 flex flex-col gap-4">
-          {NAV_LINKS.map((link) => (
-            <li key={link}>
-              <a
-                href="#"
-                onClick={() => setMenuOpen(false)}
-                className="text-4xl font-bold tracking-tight"
-              >
-                {link}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-auto text-xs text-navy/60">
-          <p>quantumslateofficial@gmail.com</p>
-          <p>aerospace education · india</p>
-        </div>
-      </div>
 
       <div className="pointer-events-none absolute inset-0 flex -translate-y-[10vh] flex-col items-center justify-center px-6 text-center">
         <h1
