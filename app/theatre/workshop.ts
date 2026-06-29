@@ -1,5 +1,5 @@
 import { getProject } from "@theatre/core";
-import workshopDroneState from "../../public/json-files/workshops/drone-3.json";
+import workshopDroneState from "../../public/json-files/workshops/drone-workshop.json";
 // Importing this boots Theatre Studio in dev when NEXT_PUBLIC_THEATRE_STUDIO=1.
 export { STUDIO_ENABLED } from "./studioInit";
 
