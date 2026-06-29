@@ -6,9 +6,12 @@ import { Environment, useGLTF } from "@react-three/drei";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import type { Group } from "three";
 import { rcPlaneProject, rcPlaneSheet, STUDIO_ENABLED } from "../theatre/rcplane";
+import { useLoopedSequence } from "../theatre/useLoopedSequence";
 import { normalize } from "./droneInstance";
 
 const PLANE_MODEL = "/3d-models/rcplane/scene.gltf";
+// Last authored keyframe — play 0→here, then a 2s gap, then loop.
+const MOTION_END = 3.7;
 
 // The plane GLTF ships no animation clips, so this is just a normalized clone
 // (centered ~1-unit box) with the same responsive scale + pointer parallax as the
@@ -41,18 +44,8 @@ export default function RcPlane() {
 
   useEffect(() => setMounted(true), []);
 
-  // Play the authored animation on a loop. In editor mode, let Studio drive the
-  // playhead instead so you can scrub and author keyframes.
-  useEffect(() => {
-    if (!mounted) return;
-    if (STUDIO_ENABLED) return;
-    rcPlaneProject.ready.then(() => {
-      rcPlaneSheet.sequence.pause();
-      rcPlaneSheet.sequence.position = 0;
-      rcPlaneSheet.sequence.play({ iterationCount: Infinity });
-    });
-    return () => rcPlaneSheet.sequence.pause();
-  }, [mounted]);
+  // Loop motion → 2s gap. In editor mode, let Studio drive the playhead instead.
+  useLoopedSequence(mounted && !STUDIO_ENABLED, rcPlaneProject, rcPlaneSheet, MOTION_END);
 
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden">

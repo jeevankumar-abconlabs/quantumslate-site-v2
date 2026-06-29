@@ -6,8 +6,12 @@ import { Environment, useGLTF } from "@react-three/drei";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import type { Group } from "three";
 import { rocketProject, rocketSheet, STUDIO_ENABLED } from "../theatre/rocket";
+import { useLoopedSequence } from "../theatre/useLoopedSequence";
 import { normalize } from "./droneInstance";
 import Preloader from "./Preloader";
+
+// Last authored keyframe — play 0→here, then a 2s gap, then loop.
+const MOTION_END = 2.967;
 
 const ROCKET_MODEL = "/3d-models/rocket/scene.gltf";
 
@@ -43,19 +47,9 @@ export default function Rocket3D() {
 
   useEffect(() => setMounted(true), []);
 
-  // Loop the authored animation, but wait until the model has loaded (the preloader
-  // signals via onReady) so the first cycle plays in view, not behind the loader.
-  // In editor mode, let Studio drive the playhead instead.
-  useEffect(() => {
-    if (!loaded) return;
-    if (STUDIO_ENABLED) return;
-    rocketProject.ready.then(() => {
-      rocketSheet.sequence.pause();
-      rocketSheet.sequence.position = 0;
-      rocketSheet.sequence.play({ iterationCount: Infinity });
-    });
-    return () => rocketSheet.sequence.pause();
-  }, [loaded]);
+  // Loop motion → 2s gap, but only after the model has loaded (preloader's onReady)
+  // so the first cycle plays in view. In editor mode, let Studio drive the playhead.
+  useLoopedSequence(loaded && !STUDIO_ENABLED, rocketProject, rocketSheet, MOTION_END);
 
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden">

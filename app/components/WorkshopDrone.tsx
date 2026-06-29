@@ -5,7 +5,11 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import { workshopProject, workshopSheet, STUDIO_ENABLED } from "../theatre/workshop";
+import { useLoopedSequence } from "../theatre/useLoopedSequence";
 import { useDroneInstance } from "./droneInstance";
+
+// Last authored keyframe — play 0→here, then a 2s gap, then loop.
+const MOTION_END = 2.967;
 
 // Identical to the hero drone in DroneModel: the normalized hover clone, the same
 // responsive scale (bigger floor so it reads on phones), and the same light pointer
@@ -35,18 +39,8 @@ export default function WorkshopDrone() {
 
   useEffect(() => setMounted(true), []);
 
-  // Play the authored workshop animation on a loop. In editor mode, let Studio
-  // drive the playhead instead so you can scrub and author keyframes.
-  useEffect(() => {
-    if (!mounted) return;
-    if (STUDIO_ENABLED) return;
-    workshopProject.ready.then(() => {
-      workshopSheet.sequence.pause();
-      workshopSheet.sequence.position = 0;
-      workshopSheet.sequence.play({ iterationCount: Infinity });
-    });
-    return () => workshopSheet.sequence.pause();
-  }, [mounted]);
+  // Loop motion → 2s gap. In editor mode, let Studio drive the playhead instead.
+  useLoopedSequence(mounted && !STUDIO_ENABLED, workshopProject, workshopSheet, MOTION_END);
 
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden">
