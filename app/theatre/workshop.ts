@@ -1,14 +1,16 @@
 import { getProject } from "@theatre/core";
-import workshopDroneState from "../../public/json-files/workshops/drone-workshop.json";
+import workshopDroneState from "../../public/json-files/workshops/drone-3.json";
+// Importing this boots Theatre Studio in dev when NEXT_PUBLIC_THEATRE_STUDIO=1.
+export { STUDIO_ENABLED } from "./studioInit";
 
-// Separate project/JSON for the Workshops "Drones" card flight, authored in
-// Studio independently of the hero. Set NEXT_PUBLIC_THEATRE_TARGET=drones (and
-// NEXT_PUBLIC_THEATRE_STUDIO=1) to edit it. The Studio editor itself is booted
-// once in ../theatre/drone.ts; this module just exposes the sheet to author.
+// Independent project/sheet for the Workshops "Drones" drone, authored in Studio
+// separately from the hero. The seed JSON places it at the hero's resting pose with
+// an empty sequence, so it looks identical until you animate it.
 //
-// ponytail: ships with an empty sequence — until you author keyframes in Studio
-// the click reveals the text instantly. Author the fly-away, then export the
-// state over public/json-files/workshop-drone.json.
+// To edit: set NEXT_PUBLIC_THEATRE_STUDIO=1 and NEXT_PUBLIC_THEATRE_TARGET=drones in
+// .env, restart dev, open /workshops/drones, and author keyframes on the "Drone"
+// object in the Studio timeline. Then export the state and save it over
+// public/json-files/workshops/drone-workshop.json.
 export const workshopProject = getProject("QuantumSlate Workshop Drone", {
   state: workshopDroneState,
 });
