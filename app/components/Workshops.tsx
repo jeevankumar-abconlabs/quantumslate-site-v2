@@ -16,7 +16,7 @@ const WORKSHOPS = [
   },
   {
     title: "Model Rockets",
-    href: "#",
+    href: "/workshops/rockets",
     body: "Engineer a real rocket from the airframe up, wire its recovery system, and put it to the test with a live countdown launch.",
   },
 ];
