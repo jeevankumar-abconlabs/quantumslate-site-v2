@@ -1,12 +1,12 @@
 import WorkshopDrone from "../../components/WorkshopDrone";
-import DronesTitle from "../../components/DronesTitle";
+import WorkshopTitle from "../../components/WorkshopTitle";
 import DroneWorkshop from "../../components/DroneWorkshop";
 
 export default function DronesPage() {
   return (
     <main className="flex-1">
       <WorkshopDrone />
-      <DronesTitle />
+      <WorkshopTitle label="Drones" />
       <DroneWorkshop />
     </main>
   );

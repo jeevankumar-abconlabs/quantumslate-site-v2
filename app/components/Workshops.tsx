@@ -11,7 +11,7 @@ const WORKSHOPS = [
   },
   {
     title: "RC Planes",
-    href: "#",
+    href: "/workshops/rc-planes",
     body: "Design, build, and trim your own aircraft, then take it from nervous maiden flight to confident aerobatic rolls.",
   },
   {

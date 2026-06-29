@@ -38,7 +38,7 @@ export function rebaseHover(animations: AnimationClip[]) {
 // Deterministically normalize a fresh skinned clone to a ~1-unit box centered at
 // the origin. drei's <Center>/<Resize> can't reliably measure a skinned clone
 // (it renders scaled to ~0 → invisible/tiny), so do it by hand.
-function normalize(scene: Object3D): Object3D {
+export function normalize(scene: Object3D): Object3D {
   const c = skeletonClone(scene);
   c.updateWorldMatrix(true, true);
   const size = new Box3().setFromObject(c).getSize(new Vector3());

@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Standalone "DRONES" section, between the drone hero and the workshop details.
-export default function DronesTitle() {
+// Standalone title section that reveals on scroll — shared by the workshop pages
+// (Drones, RC Planes, …). Pass the heading text via `label`.
+export default function WorkshopTitle({ label }: { label: string }) {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function DronesTitle() {
         ref={titleRef}
         className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy opacity-0"
       >
-        Drones
+        {label}
       </h1>
     </section>
   );
