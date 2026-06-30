@@ -21,10 +21,17 @@ function Plane() {
   const { scene } = useGLTF(PLANE_MODEL);
   const object = useMemo(() => normalize(scene), [scene]);
 
+  // The GLTF's spinning part is the "propeller" node — spin it about its own hub.
+  const propeller = useMemo(() => object.getObjectByName("propeller"), [object]);
+
   const width = useThree((s) => s.viewport.width);
   const scale = Math.min(0.9, Math.max(0.5, width / 6));
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
+    // ponytail: spin knob — bump speed, or switch to .x/.y if it tumbles instead
+    // of spinning flat (depends on how the model exported the prop's axis).
+    if (propeller) propeller.rotation.y += delta * 25;
+
     if (!group.current) return;
     group.current.rotation.y += (state.pointer.x * 0.15 - group.current.rotation.y) * 0.05;
     group.current.rotation.x += (-state.pointer.y * 0.1 - group.current.rotation.x) * 0.05;
