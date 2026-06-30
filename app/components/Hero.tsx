@@ -9,11 +9,12 @@ import { heroProject, heroSheet } from "../theatre/hero";
 import { introState } from "../introState";
 
 // Play the hero drone's authored entrance (if any) once the site is revealed.
+// Plays a single time and holds on the final frame — no looping back to start.
 function playHero() {
   heroProject.ready.then(() => {
     heroSheet.sequence.pause();
     heroSheet.sequence.position = 0;
-    heroSheet.sequence.play({ iterationCount: Infinity });
+    heroSheet.sequence.play({ iterationCount: 1 });
   });
 }
 
@@ -101,26 +102,30 @@ export default function Hero() {
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
-      {/* Full-bleed background photo, behind the transparent 3D canvas.
-          Separate crops for mobile vs. desktop. */}
-      <Image
-        src="/backgrounds/hero-background-mobile.png"
-        alt=""
-        fill
-        priority
-        unoptimized
-        sizes="100vw"
-        className="pointer-events-none object-cover md:hidden"
-      />
-      <Image
-        src="/backgrounds/hero-background.png"
-        alt=""
-        fill
-        priority
-        unoptimized
-        sizes="100vw"
-        className="pointer-events-none hidden object-cover md:block"
-      />
+      {/* Full-bleed background photo — only once the site reveals, so it never
+          shows behind the intro fly-in. Separate crops for mobile vs. desktop. */}
+      {revealed && (
+        <>
+          <Image
+            src="/backgrounds/hero-background-mobile.png"
+            alt=""
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="pointer-events-none object-cover md:hidden"
+          />
+          <Image
+            src="/backgrounds/hero-background.png"
+            alt=""
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="pointer-events-none hidden object-cover md:block"
+          />
+        </>
+      )}
 
       <DroneModel revealed={revealed} />
 

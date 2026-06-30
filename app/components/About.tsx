@@ -16,7 +16,7 @@ export default function About() {
           <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
             About Us
           </h1>
-          <p className="mt-8 max-w-prose text-justify text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
+          <p className="mt-8 max-w-prose break-words text-left text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
             QuantumSlate is at the forefront of aerospace education and
             innovation. We specialize in delivering immersive offline workshops
             that transform theoretical knowledge into practical expertise. Our
@@ -39,10 +39,10 @@ function Carousel() {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-navy/10">
+    <div className="w-full min-w-0 flex flex-col gap-4">
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-3xl border border-navy/10">
         <div
-          className="flex h-full transition-transform duration-500 ease-out"
+          className="flex w-full h-full transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {SLIDES.map((label) => (
