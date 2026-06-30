@@ -5,7 +5,7 @@ import CtaBand from "./components/CtaBand";
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <main className="flex-1 bg-[#F1E8DA]">
       <DroneScene />
       <AboutPreview />
       <Workshops />

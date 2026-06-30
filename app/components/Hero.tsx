@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useProgress } from "@react-three/drei";
 import DroneModel from "./DroneModel";
 import { project, sheet, STUDIO_ENABLED } from "../theatre/drone";
@@ -99,10 +100,26 @@ export default function Hero() {
   }, [assetsReady]);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background">
-      {/* Faint engineering grid, fading out toward the edges. */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.12)_1px,transparent_1px)] bg-[size:clamp(36px,6vw,64px)_clamp(36px,6vw,64px)] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]"
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
+      {/* Full-bleed background photo, behind the transparent 3D canvas.
+          Separate crops for mobile vs. desktop. */}
+      <Image
+        src="/backgrounds/hero-background-mobile.png"
+        alt=""
+        fill
+        priority
+        unoptimized
+        sizes="100vw"
+        className="pointer-events-none object-cover md:hidden"
+      />
+      <Image
+        src="/backgrounds/hero-background.png"
+        alt=""
+        fill
+        priority
+        unoptimized
+        sizes="100vw"
+        className="pointer-events-none hidden object-cover md:block"
       />
 
       <DroneModel revealed={revealed} />

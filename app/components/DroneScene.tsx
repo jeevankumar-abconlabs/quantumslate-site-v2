@@ -8,9 +8,7 @@ import dynamic from "next/dynamic";
 const Hero = dynamic(() => import("./Hero"), {
   ssr: false,
   loading: () => (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.12)_1px,transparent_1px)] bg-[size:clamp(36px,6vw,64px)_clamp(36px,6vw,64px)] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
-    </div>
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]" />
   ),
 });
 
