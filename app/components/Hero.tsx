@@ -113,7 +113,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="pointer-events-none object-cover md:hidden"
+            className="pointer-events-none object-cover opacity-65 md:hidden"
           />
           <Image
             src="/backgrounds/hero-background.png"
@@ -122,7 +122,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="pointer-events-none hidden object-cover md:block"
+            className="pointer-events-none hidden object-cover opacity-65 md:block"
           />
         </>
       )}
@@ -183,7 +183,7 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 flex -translate-y-[10vh] flex-col items-center justify-center px-6 text-center">
         <h1
-          className={`text-[clamp(2.5rem,9vw,7rem)] font-semibold tracking-tight text-navy transition-all duration-1000 ease-out ${
+          className={`break-words text-[clamp(1.75rem,8vw,7rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-all duration-1000 ease-out ${
             revealed ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >

@@ -18,13 +18,13 @@ export default function AboutPreview() {
           <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
             About Us
           </h2>
-          <p className="mt-6 text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
+          <p className="mt-6 text-justify text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
             QuantumSlate brings aerospace education to life through immersive,
             hands-on workshops in drone technology, RC aviation, and rocketry —
             turning theory into the real thing.
           </p>
 
-          <div className="mt-10 grid grid-cols-2 gap-4">
+          <div className="mt-10 grid w-full max-w-[340px] grid-cols-2 gap-4">
             {STATS.map((s) => (
               <div
                 key={s.label}

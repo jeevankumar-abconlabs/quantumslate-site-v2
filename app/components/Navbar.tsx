@@ -73,7 +73,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-unbounded font-black text-[14px] sm:text-[16px] md:text-[18px] tracking-tighter text-navy uppercase"
+            className="font-black text-[14px] sm:text-[16px] md:text-[18px] tracking-tight text-navy uppercase"
           >
             QUANTUM<span className="text-navy">SLATE</span>
           </Link>
@@ -168,7 +168,7 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={closeMobile}
-                className="font-unbounded font-black text-[15px] tracking-tighter text-navy uppercase"
+                className="font-black text-[15px] tracking-tight text-navy uppercase"
               >
                 QUANTUM<span className="text-navy">SLATE</span>
               </Link>
