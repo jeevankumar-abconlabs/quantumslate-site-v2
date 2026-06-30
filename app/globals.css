@@ -6,12 +6,14 @@
   --background: #f4f1e8; /* ivory */
   --foreground: #111111; /* black text */
   --navy: #14274e;       /* royal navy accent */
+  --gold: #c9a227;       /* gold accent */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-navy: var(--navy);
+  --color-gold: var(--gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-unbounded: var(--font-unbounded);
