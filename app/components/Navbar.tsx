@@ -75,7 +75,7 @@ export default function Navbar() {
             href="/"
             className="font-unbounded font-black text-[14px] sm:text-[16px] md:text-[18px] tracking-tighter text-navy uppercase"
           >
-            QUANTUM<span className="text-navy/60">SLATE</span>
+            QUANTUM<span className="text-navy">SLATE</span>
           </Link>
 
           {/* Desktop nav links */}
@@ -170,7 +170,7 @@ export default function Navbar() {
                 onClick={closeMobile}
                 className="font-unbounded font-black text-[15px] tracking-tighter text-navy uppercase"
               >
-                QUANTUM<span className="text-navy/60">SLATE</span>
+                QUANTUM<span className="text-navy">SLATE</span>
               </Link>
               <button
                 onClick={closeMobile}

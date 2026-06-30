@@ -11,7 +11,7 @@ const STATS = [
 
 export default function AboutPreview() {
   return (
-    <section id="about" className="w-full px-6 py-20 md:px-12 md:py-28">
+    <section id="about" className="w-full px-6 py-6 md:px-12 md:py-8">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
         {/* Left: copy + stats + CTA */}
         <div className="flex flex-col">

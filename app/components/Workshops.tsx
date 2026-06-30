@@ -23,7 +23,7 @@ const WORKSHOPS = [
 
 export default function Workshops() {
   return (
-    <section id="workshops" className="w-full px-6 py-20 md:px-12 md:py-28">
+    <section id="workshops" className="w-full px-6 py-6 md:px-12 md:py-8">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           Our Workshops

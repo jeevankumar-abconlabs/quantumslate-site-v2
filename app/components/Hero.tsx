@@ -165,7 +165,7 @@ export default function Hero() {
             revealed ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          QuantumSlate
+          QUANTUMSLATE
         </h1>
         <p
           className={`mt-6 max-w-[min(36rem,90vw)] text-[clamp(0.95rem,2.4vw,1.2rem)] leading-relaxed text-foreground/80 transition-all duration-1000 ease-out ${
