@@ -38,6 +38,16 @@ export default function Hero() {
     };
   }, []);
 
+  // Lock page scroll while the cinematic intro plays — the action is all in the
+  // hero, so don't let the user scroll past it. Unlocks the moment it reveals.
+  useEffect(() => {
+    if (STUDIO_ENABLED || revealed) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [revealed]);
+
   useEffect(() => {
     if (!active && progress === 100) setAssetsReady(true);
   }, [active, progress]);
