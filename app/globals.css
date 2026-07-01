@@ -25,3 +25,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Clip any stray horizontal overflow at the scroll root so tablets/phones never
+   get a sideways gutter. `clip` (not `hidden`) avoids creating a scroll
+   container, so sticky/fixed positioning is unaffected. */
+html {
+  overflow-x: clip;
+}

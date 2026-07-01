@@ -103,7 +103,9 @@ export default function Hero() {
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
       {/* Full-bleed background photo — only once the site reveals, so it never
-          shows behind the intro fly-in. Separate crops for mobile vs. desktop. */}
+          shows behind the intro fly-in. Chosen by ORIENTATION, not width: the
+          9:16 crop fills portrait screens (phones + iPad portrait), the 16:9
+          fills landscape (desktop + iPad landscape). */}
       {revealed && (
         <>
           <Image
@@ -113,7 +115,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="pointer-events-none object-cover opacity-65 md:hidden"
+            className="pointer-events-none object-cover opacity-65 landscape:hidden"
           />
           <Image
             src="/backgrounds/hero-background.png"
@@ -122,7 +124,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="pointer-events-none hidden object-cover opacity-65 md:block"
+            className="pointer-events-none hidden object-cover opacity-65 landscape:block"
           />
         </>
       )}
