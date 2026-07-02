@@ -28,7 +28,7 @@ export default function AboutPreview() {
             {STATS.map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-navy/10 bg-navy/[0.03] p-4"
+                className="border border-navy/10 bg-navy/[0.03] p-4"
               >
                 <div className="text-2xl font-black tracking-tight text-navy">
                   {s.value}
@@ -49,7 +49,7 @@ export default function AboutPreview() {
         </div>
 
         {/* Right: image placeholder */}
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-navy/10 bg-navy/[0.04]">
+        <div className="relative aspect-[4/3] overflow-hidden border border-navy/10 bg-navy/[0.04]">
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(12,31,60,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(12,31,60,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
           <span className="absolute bottom-5 left-5 text-xs font-medium uppercase tracking-widest text-navy/40">
             QuantumSlate

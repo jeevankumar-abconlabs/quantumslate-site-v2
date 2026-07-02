@@ -18,7 +18,7 @@ export default function Competitions() {
     <section id="competitions" className="w-full px-6 py-6 md:px-12 md:py-8">
       <div className="mx-auto max-w-6xl">
         {/* ── Title band: group photo behind the heading ── */}
-        <div className="relative overflow-hidden rounded-3xl bg-navy">
+        <div className="relative overflow-hidden bg-navy">
           {/* Group photo goes here — sits behind the title at reduced opacity,
               echoing the hero. Replace this placeholder with the real photo:
               <Image src="/competitions/group.jpg" alt="" fill priority
@@ -71,7 +71,7 @@ export default function Competitions() {
 function PhotoTile({ span }: { span: string }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-3xl border border-navy/10 bg-navy/[0.05] ${span}`}
+      className={`relative overflow-hidden border border-navy/10 bg-navy/[0.05] ${span}`}
     >
       {/* Engineering-grid placeholder — swap for a real <Image fill> per discipline. */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />

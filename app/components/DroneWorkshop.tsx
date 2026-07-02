@@ -58,7 +58,7 @@ export default function DroneWorkshop() {
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className="aspect-[4/3] overflow-hidden rounded-2xl border border-navy/10 bg-navy/[0.05] shadow-[0_8px_30px_rgba(20,39,78,0.08)]"
+                className="aspect-[4/3] overflow-hidden border border-navy/10 bg-navy/[0.05] shadow-[0_8px_30px_rgba(20,39,78,0.08)]"
               >
                 <div className="h-full w-full bg-[linear-gradient(to_right,rgba(12,31,60,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(12,31,60,0.10)_1px,transparent_1px)] bg-[size:24px_24px]" />
               </div>

@@ -40,7 +40,7 @@ function Carousel() {
 
   return (
     <div className="w-full min-w-0 flex flex-col gap-4">
-      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-3xl border border-navy/10">
+      <div className="relative w-full aspect-[4/3] overflow-hidden border border-navy/10">
         <div
           className="flex w-full h-full transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}

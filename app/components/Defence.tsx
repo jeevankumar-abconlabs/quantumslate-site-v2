@@ -73,7 +73,7 @@ export default function Defence() {
                   onClick={() => go(i)}
                   aria-label={slide.alt}
                   aria-current={i === active}
-                  className="absolute inset-0 origin-center cursor-pointer overflow-hidden rounded-3xl border border-navy/10 bg-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="absolute inset-0 origin-center cursor-pointer overflow-hidden border border-navy/10 bg-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   style={{ zIndex: 10 - abs, pointerEvents: hidden ? "none" : "auto" }}
                   animate={{
                     x: reduce ? `${offset * 100}%` : `${offset * 58}%`,

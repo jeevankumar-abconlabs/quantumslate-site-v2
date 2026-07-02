@@ -107,12 +107,12 @@ export default function Navbar() {
                         transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                         className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-60"
                       >
-                        <div className="bg-background/95 backdrop-blur-md border border-navy/10 rounded-2xl p-2 shadow-2xl">
+                        <div className="bg-background/95 backdrop-blur-md border border-navy/10 p-2 shadow-2xl">
                           {link.children.map((child) => (
                             <Link
                               key={child.name}
                               href={child.href}
-                              className="block px-4 py-3 rounded-xl text-[13px] font-medium text-navy/70 hover:text-navy hover:bg-navy/[0.06] transition-colors duration-200"
+                              className="block px-4 py-3 text-[13px] font-medium text-navy/70 hover:text-navy hover:bg-navy/[0.06] transition-colors duration-200"
                             >
                               {child.name}
                             </Link>

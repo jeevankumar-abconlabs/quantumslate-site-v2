@@ -53,7 +53,7 @@ export default function ContactPage() {
           {/* Left — message form (in a card) */}
           <form
             onSubmit={onSubmit}
-            className="flex flex-col gap-4 rounded-3xl border border-navy/10 bg-navy/[0.03] p-8 md:p-10"
+            className="flex flex-col gap-4 border border-navy/10 bg-navy/[0.03] p-8 md:p-10"
           >
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-semibold text-navy">
@@ -139,7 +139,7 @@ export default function ContactPage() {
           </form>
 
           {/* Right — reach us directly (sizes to its content, doesn't stretch) */}
-          <div className="self-start rounded-3xl border border-navy/10 bg-navy/[0.03] p-8 md:p-10">
+          <div className="self-start border border-navy/10 bg-navy/[0.03] p-8 md:p-10">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-navy/50">
               Reach Us Directly
             </h2>

@@ -51,7 +51,7 @@ function Card({ title, body, href }: { title: string; body: string; href: string
   return (
     <Link
       href={href}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-navy/10 bg-navy/[0.03] transition-colors hover:border-gold/40"
+      className="group flex flex-col overflow-hidden border border-navy/10 bg-navy/[0.03] transition-colors hover:border-gold/40"
     >
       {/* Image placeholder with faint engineering grid */}
       <div className="relative aspect-[4/3] bg-navy/[0.05]">
