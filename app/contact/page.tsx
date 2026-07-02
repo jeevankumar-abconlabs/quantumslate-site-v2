@@ -39,7 +39,7 @@ export default function ContactPage() {
     "w-full rounded-xl border border-navy/15 bg-background px-4 py-3 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-navy";
 
   return (
-    <main className="flex-1">
+    <main className="flex-1 bg-[#F1E8DA]">
       <section className="mx-auto max-w-6xl px-6 py-24 md:px-12 md:py-32">
         <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           Contact Us

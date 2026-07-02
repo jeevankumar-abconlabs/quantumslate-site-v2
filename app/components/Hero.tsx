@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useProgress } from "@react-three/drei";
 import DroneModel from "./DroneModel";
 import { project, sheet, STUDIO_ENABLED } from "../theatre/drone";
@@ -102,32 +101,9 @@ export default function Hero() {
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
-      {/* Full-bleed background photo — only once the site reveals, so it never
-          shows behind the intro fly-in. Chosen by ORIENTATION, not width: the
-          9:16 crop fills portrait screens (phones + iPad portrait), the 16:9
-          fills landscape (desktop + iPad landscape). */}
-      {revealed && (
-        <>
-          <Image
-            src="/backgrounds/hero-background-mobile.png"
-            alt=""
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="pointer-events-none object-cover opacity-65 landscape:hidden"
-          />
-          <Image
-            src="/backgrounds/hero-background.png"
-            alt=""
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="pointer-events-none hidden object-cover opacity-65 landscape:block"
-          />
-        </>
-      )}
+      {/* ponytail: hero background image removed for now — it interfered with
+          the intro animation lock. Re-add the orientation-based <Image> pair
+          when the animation issue is sorted. */}
 
       <DroneModel revealed={revealed} />
 
