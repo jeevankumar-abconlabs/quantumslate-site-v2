@@ -88,7 +88,7 @@ export default function Footer() {
               </h4>
               <a
                 href="mailto:quantumslateofficial@gmail.com"
-                className="whitespace-nowrap text-sm text-foreground/70 transition-colors hover:text-navy"
+                className="break-words text-sm text-foreground/70 transition-colors hover:text-navy"
               >
                 quantumslateofficial@gmail.com
               </a>

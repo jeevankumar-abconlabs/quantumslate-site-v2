@@ -54,12 +54,26 @@ function useHover(group: React.RefObject<Group | null>, animations: AnimationCli
 }
 
 // Intro drone: Theatre choreographs the fly-in; the hover clip loops inside.
-function IntroDrone() {
+function IntroDrone({ onPrimed }: { onPrimed?: () => void }) {
   const group = useRef<Group>(null);
   const { scene, animations } = useGLTF(MODEL);
   useMemo(() => rebaseHover(animations), [animations]);
   useHover(group, animations);
   const scale = useResponsiveScale();
+
+  // Network-loaded (useProgress) isn't the same as "actually painted" — the GPU
+  // still has to compile shaders on the first real draw, and that can stall the
+  // main thread for a beat on slower devices. If the Theatre clock is already
+  // ticking during that stall, playback silently skips ahead past the opening
+  // keyframes. Wait for a few genuinely rendered frames (proof the stall has
+  // already happened and passed) before telling the caller it's safe to start
+  // the sequence and drop the preloader.
+  const primedFrames = useRef(0);
+  useFrame(() => {
+    if (!onPrimed || primedFrames.current >= 4) return;
+    primedFrames.current += 1;
+    if (primedFrames.current >= 4) onPrimed();
+  });
 
   return (
     <group scale={4 * scale}>
@@ -116,7 +130,13 @@ function HeroDrone() {
 
 useGLTF.preload(MODEL);
 
-export default function DroneModel({ revealed }: { revealed: boolean }) {
+export default function DroneModel({
+  revealed,
+  onIntroPrimed,
+}: {
+  revealed: boolean;
+  onIntroPrimed?: () => void;
+}) {
   // In editor mode, show whichever drone is being authored (NEXT_PUBLIC_THEATRE_TARGET).
   const showIntro = STUDIO_ENABLED ? STUDIO_TARGET === "intro" : !revealed;
   const showHero = STUDIO_ENABLED ? STUDIO_TARGET === "hero" : revealed;
@@ -133,7 +153,7 @@ export default function DroneModel({ revealed }: { revealed: boolean }) {
         {showIntro && (
           <e.group theatreKey="Drone">
             <Suspense fallback={null}>
-              <IntroDrone />
+              <IntroDrone onPrimed={onIntroPrimed} />
             </Suspense>
           </e.group>
         )}

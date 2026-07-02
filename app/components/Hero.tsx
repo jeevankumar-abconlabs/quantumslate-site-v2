@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import DroneModel from "./DroneModel";
 import { project, sheet, STUDIO_ENABLED } from "../theatre/drone";
@@ -31,6 +31,12 @@ export default function Hero() {
   // plays against a blank screen. drei tracks every loader in one global store.
   const { active, progress } = useProgress();
   const [assetsReady, setAssetsReady] = useState(introState.played);
+  // True once the intro drone has actually painted a few real frames (not just
+  // finished network-loading) — see DroneModel's IntroDrone for why that gap
+  // matters. Gates both the preloader fade-out and the sequence start so the
+  // Theatre clock never ticks during a GPU compile stall.
+  const [primed, setPrimed] = useState(introState.played);
+  const handleIntroPrimed = useCallback(() => setPrimed(true), []);
 
   // Pause the hero sequence on unmount to release resources and reset state.
   useEffect(() => {
@@ -41,10 +47,16 @@ export default function Hero() {
 
   // Lock page scroll while the cinematic intro plays — the action is all in the
   // hero, so don't let the user scroll past it. Unlocks the moment it reveals.
+  // Locks <html> too, not just <body>: globals.css sets `overflow-x: clip` on
+  // html for the iPad gutter fix, which per spec stops body's overflow from
+  // propagating to the viewport scrollbox — html is what actually scrolls now.
   useEffect(() => {
     if (STUDIO_ENABLED || revealed) return;
+    const html = document.documentElement;
+    html.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     return () => {
+      html.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [revealed]);
@@ -57,7 +69,10 @@ export default function Hero() {
   // ponytail: 12s ceiling; raise it if real-world loads legitimately run longer.
   useEffect(() => {
     if (introState.played) return;
-    const t = setTimeout(() => setAssetsReady(true), 12000);
+    const t = setTimeout(() => {
+      setAssetsReady(true);
+      setPrimed(true);
+    }, 12000);
     return () => clearTimeout(t);
   }, []);
 
@@ -68,8 +83,9 @@ export default function Hero() {
     }
     // Editor mode: let Studio drive the timeline; don't auto-play or reveal the overlay.
     if (STUDIO_ENABLED) return;
-    // Wait until the model is loaded so the entrance animates the real drone.
-    if (!assetsReady) return;
+    // Wait until the model is loaded AND actually painting real frames, so the
+    // entrance animates from a warmed-up GPU instead of skipping keyframes.
+    if (!assetsReady || !primed) return;
 
     // Reduced motion: skip the fly-in and show the site immediately.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -97,7 +113,7 @@ export default function Hero() {
       clearTimeout(revealTimer);
       sheet.sequence.pause();
     };
-  }, [assetsReady]);
+  }, [assetsReady, primed]);
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
@@ -105,7 +121,7 @@ export default function Hero() {
           the intro animation lock. Re-add the orientation-based <Image> pair
           when the animation issue is sorted. */}
 
-      <DroneModel revealed={revealed} />
+      <DroneModel revealed={revealed} onIntroPrimed={handleIntroPrimed} />
 
       {/* Crash cut-to-black: snaps in as the drone hits, holds, then fades to reveal the site. */}
       {crashed && (
@@ -122,7 +138,7 @@ export default function Hero() {
       {!STUDIO_ENABLED && !introState.played && (
         <div
           className={`absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-background transition-opacity duration-700 ease-out ${
-            assetsReady ? "pointer-events-none opacity-0" : "opacity-100"
+            primed ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
         >
           <div className="relative h-24 w-24">
