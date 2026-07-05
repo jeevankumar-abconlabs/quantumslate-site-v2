@@ -148,7 +148,7 @@ export default function DroneModel({
         <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 0, 8]} fov={40} />
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1.2} />
-        <Environment preset="city" />
+        <Environment files="/hdri/potsdamer_platz_1k.hdr" />
 
         {showIntro && (
           <e.group theatreKey="Drone">

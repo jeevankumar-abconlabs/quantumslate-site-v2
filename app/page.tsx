@@ -1,6 +1,7 @@
 import DroneScene from "./components/DroneScene";
 import AboutPreview from "./components/AboutPreview";
 import Workshops from "./components/Workshops";
+import HomeShowcase from "./components/HomeShowcase";
 import CtaBand from "./components/CtaBand";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <DroneScene />
       <AboutPreview />
       <Workshops />
+      <HomeShowcase />
       <CtaBand />
     </main>
   );

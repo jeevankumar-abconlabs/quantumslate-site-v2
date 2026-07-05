@@ -34,23 +34,25 @@ function Drone() {
   );
 }
 
-export default function WorkshopDrone() {
+// `paused` (home page, scene far offscreen): stop the frameloop and the theatre
+// loop so a mounted-but-distant canvas costs nothing per frame.
+export default function WorkshopDrone({ paused = false }: { paused?: boolean }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
   // Loop motion → 2s gap. In editor mode, let Studio drive the playhead instead.
-  useLoopedSequence(mounted && !STUDIO_ENABLED, workshopProject, workshopSheet, MOTION_END);
+  useLoopedSequence(mounted && !paused && !STUDIO_ENABLED, workshopProject, workshopSheet, MOTION_END);
 
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden">
       {mounted && (
-        <Canvas dpr={[1, 2]}>
+        <Canvas dpr={[1, 2]} frameloop={paused ? "never" : "always"}>
           <SheetProvider sheet={workshopSheet}>
             <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 0, 8]} fov={40} />
             <ambientLight intensity={0.6} />
             <directionalLight position={[5, 5, 5]} intensity={1.2} />
-            <Environment preset="city" />
+            <Environment files="/hdri/potsdamer_platz_1k.hdr" />
             <e.group theatreKey="Drone" position={[0, -1.6, 0]} scale={3}>
               <Suspense fallback={null}>
                 <Drone />
