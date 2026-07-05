@@ -42,7 +42,7 @@ function LazyStage({ Scene }: { Scene: ComponentType<{ paused?: boolean }> }) {
   }, []);
 
   return (
-    <div ref={ref} className="h-[100dvh] w-full">
+    <div ref={ref} className="h-[55dvh] w-full md:h-[100dvh]">
       {show && <Scene paused={!near} />}
     </div>
   );

@@ -3,7 +3,7 @@
 // scroll-reveal fade caused visible flicker.
 export default function WorkshopTitle({ label }: { label: string }) {
   return (
-    <section className="flex min-h-[40vh] w-full items-center justify-center px-6">
+    <section className="flex min-h-[22vh] w-full items-center justify-center px-6 md:min-h-[40vh]">
       <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
         {label}
       </h1>

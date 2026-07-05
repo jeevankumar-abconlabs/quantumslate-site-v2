@@ -57,8 +57,11 @@ export default function RcPlane({ paused = false }: { paused?: boolean }) {
   useLoopedSequence(mounted && !paused && !STUDIO_ENABLED, rcPlaneProject, rcPlaneSheet, MOTION_END);
 
   return (
-    <section className="relative h-[100dvh] w-full overflow-hidden">
+    // Mobile: section shorter than the bottom-anchored canvas, cropping the
+    // camera's dead space off the top. Desktop: canvas fills the section.
+    <section className="relative h-[55dvh] w-full overflow-hidden md:h-[100dvh]">
       {mounted && (
+        <div className="absolute inset-x-0 bottom-0 h-[70dvh] md:inset-0 md:h-auto">
         <Canvas dpr={[1, 2]} frameloop={paused ? "never" : "always"}>
           <SheetProvider sheet={rcPlaneSheet}>
             <PerspectiveCamera theatreKey="Camera" makeDefault position={[0, 0, 8]} fov={40} />
@@ -72,6 +75,7 @@ export default function RcPlane({ paused = false }: { paused?: boolean }) {
             </e.group>
           </SheetProvider>
         </Canvas>
+        </div>
       )}
 
       {/* Scroll cue — a bright pill button. */}
