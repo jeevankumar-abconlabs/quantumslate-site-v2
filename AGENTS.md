@@ -10,8 +10,6 @@ Use these for all UI. Don't introduce off-palette colours without asking.
 
 | Hex       | Role |
 |-----------|------|
-| `#0A1A33` | Darkest navy — deep backgrounds, high-contrast text |
-| `#143A6E` | Dark blue — primary navy accent, headings |
-| `#2F6AA7` | Medium blue — links, secondary accents, hovers |
+| `#002166` | Logo blue — primary navy accent, headings, links |
 | `#F1E8DA` | Cream — page background |
 | `#C7B7A3` | Tan — muted accents, borders, subtle fills |
