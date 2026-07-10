@@ -4,14 +4,16 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, useGLTF } from "@react-three/drei";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
-import type { Group } from "three";
+import type { Group, PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { rocketProject, rocketSheet, STUDIO_ENABLED } from "../theatre/rocket";
-import { useLoopedSequence } from "../theatre/useLoopedSequence";
-import { normalize } from "./droneInstance";
+import { useIntroThenLoop } from "../theatre/useLoopedSequence";
+import { compensateDockX, normalize } from "./droneInstance";
 import Preloader from "./Preloader";
 
-// Last authored keyframe — play 0→here, then a 2s gap, then loop.
-const MOTION_END = 2.967;
+// Intro: spin at centre (0→2.967), then dock to the left (→3.967). After that
+// the [3.967, 7.967] segment (one slow full turn while docked) loops forever.
+const INTRO_END = 3.967;
+const LOOP_END = 7.967;
 
 const ROCKET_MODEL = "/3d-models/rocket/Yellow_Toy_Rocket.gltf";
 
@@ -28,6 +30,7 @@ function Rocket() {
 
   useFrame((state) => {
     if (!group.current) return;
+    compensateDockX(group.current, state.viewport.aspect, state.camera as ThreePerspectiveCamera);
     group.current.rotation.y += (state.pointer.x * 0.15 - group.current.rotation.y) * 0.05;
     group.current.rotation.x += (-state.pointer.y * 0.1 - group.current.rotation.x) * 0.05;
   });
@@ -42,16 +45,30 @@ function Rocket() {
 useGLTF.preload(ROCKET_MODEL);
 
 // `paused` (home page, scene far offscreen): stop the frameloop and the theatre
-// loop so a mounted-but-distant canvas costs nothing per frame.
-export default function Rocket3D({ paused = false }: { paused?: boolean }) {
+// loop so a mounted-but-distant canvas costs nothing per frame. `rememberIntro`
+// (home page): don't replay the intro after a route change back to home.
+export default function Rocket3D({
+  paused = false,
+  rememberIntro = false,
+}: {
+  paused?: boolean;
+  rememberIntro?: boolean;
+}) {
   const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
-  // Loop motion → 2s gap, but only after the model has loaded (preloader's onReady)
-  // so the first cycle plays in view. In editor mode, let Studio drive the playhead.
-  useLoopedSequence(loaded && !paused && !STUDIO_ENABLED, rocketProject, rocketSheet, MOTION_END);
+  // One intro run at centre (only after the model has loaded, so it plays in
+  // view), then the rocket docks left and spins forever. Studio drives in editor mode.
+  const introDone = useIntroThenLoop(
+    loaded && !paused && !STUDIO_ENABLED,
+    rocketProject,
+    rocketSheet,
+    INTRO_END,
+    LOOP_END,
+    rememberIntro,
+  );
 
   return (
     // Mobile: section shorter than the bottom-anchored canvas, cropping the
@@ -65,11 +82,14 @@ export default function Rocket3D({ paused = false }: { paused?: boolean }) {
             <ambientLight intensity={0.6} />
             <directionalLight position={[5, 5, 5]} intensity={1.2} />
             <Environment files="/hdri/potsdamer_platz_1k.hdr" />
-            <e.group theatreKey="Rocket" position={[0, 0, 0]} scale={3}>
-              <Suspense fallback={null}>
-                <Rocket />
-              </Suspense>
-            </e.group>
+            {/* Static wrapper: compensateDockX cancels the dock-left on narrow screens here. */}
+            <group>
+              <e.group theatreKey="Rocket" position={[0, 0, 0]} scale={3}>
+                <Suspense fallback={null}>
+                  <Rocket />
+                </Suspense>
+              </e.group>
+            </group>
           </SheetProvider>
         </Canvas>
         </div>
@@ -77,6 +97,18 @@ export default function Rocket3D({ paused = false }: { paused?: boolean }) {
 
       {/* Heavy model — cover the scene with a percentage preloader until it's in. */}
       {mounted && <Preloader label="Rockets" onReady={() => setLoaded(true)} />}
+
+      {/* Title fades in on the right once the rocket has docked left (md+ only —
+          mobile shows the WorkshopTitle section below the scene instead). */}
+      <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
+        <h1
+          className={`text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
+            introDone ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          Rockets
+        </h1>
+      </div>
 
       {/* Scroll cue — a bright pill button. */}
       <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">

@@ -15,10 +15,15 @@ const Rocket3D = dynamic(() => import("./Rocket"), { ssr: false });
 // Mounts a scene only once its placeholder scrolls within a viewport of view,
 // so the scenes load one by one as the user approaches — never all at once.
 // Once mounted a scene stays mounted (its WebGL context and compiled shaders
-// are expensive to rebuild), but its render loop pauses whenever it drifts
-// more than a viewport offscreen so distant canvases cost nothing per frame.
+// are expensive to rebuild), but its render loop only runs while the stage is
+// in sight, so offscreen canvases cost nothing per frame and intros can't
+// play unseen.
 // The div reserves the full-viewport slot so content below never jumps.
-function LazyStage({ Scene }: { Scene: ComponentType<{ paused?: boolean }> }) {
+function LazyStage({
+  Scene,
+}: {
+  Scene: ComponentType<{ paused?: boolean; rememberIntro?: boolean }>;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
   const [near, setNear] = useState(false);
@@ -26,24 +31,45 @@ function LazyStage({ Scene }: { Scene: ComponentType<{ paused?: boolean }> }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
+    // Before the stylesheet applies, every h-[100dvh] placeholder is 0px
+    // tall, the page collapses into the viewport, and everything reports
+    // "intersecting" at once. Ignore until the div has real height.
+
+    // Mount (and start loading assets) one viewport early…
+    const mountIo = new IntersectionObserver(
       ([entry]) => {
-        // Before the stylesheet applies, every h-[100dvh] placeholder is 0px
-        // tall, the page collapses into the viewport, and everything reports
-        // "intersecting" at once. Ignore until the div has real height.
         if (entry.boundingClientRect.height === 0) return;
-        setNear(entry.isIntersecting);
-        if (entry.isIntersecting) setShow(true);
+        if (entry.isIntersecting) {
+          setShow(true);
+          mountIo.disconnect();
+        }
       },
-      { rootMargin: "100% 0px" }, // start loading one viewport early
+      { rootMargin: "100% 0px" },
     );
-    io.observe(el);
-    return () => io.disconnect();
+    // …but only animate once the MODEL is actually in sight: the model sits in
+    // the middle of the stage, so waiting for ~60% of the stage guarantees the
+    // intro plays in front of the user instead of just below the fold. Pause
+    // again only when the stage is fully offscreen — never freeze a model the
+    // user can still see.
+    const playIo = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.boundingClientRect.height === 0) return;
+        if (entry.intersectionRatio >= 0.6) setNear(true);
+        else if (!entry.isIntersecting) setNear(false);
+      },
+      { threshold: [0, 0.6] },
+    );
+    mountIo.observe(el);
+    playIo.observe(el);
+    return () => {
+      mountIo.disconnect();
+      playIo.disconnect();
+    };
   }, []);
 
   return (
     <div ref={ref} className="h-[55dvh] w-full md:h-[100dvh]">
-      {show && <Scene paused={!near} />}
+      {show && <Scene paused={!near} rememberIntro />}
     </div>
   );
 }
@@ -51,6 +77,8 @@ function LazyStage({ Scene }: { Scene: ComponentType<{ paused?: boolean }> }) {
 export default function HomeShowcase() {
   return (
     <>
+      {/* md+: titles live inside each scene (model docks left, title on the
+          right). Mobile: WorkshopTitle shows each title below its scene. */}
       <LazyStage Scene={WorkshopDrone} />
       <WorkshopTitle label="Drones" />
       <LazyStage Scene={RcPlane} />

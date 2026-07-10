@@ -31,9 +31,9 @@ export default function Navbar() {
       ],
     },
     { name: "Competitions", href: "/competitions" },
+    { name: "Defence", href: "/defence" },
     { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
-    { name: "Defence", href: "/defence" },
   ];
 
   // Only the first Home load waits for the drone intro to finish. Other routes,
@@ -71,11 +71,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
 
           {/* Logo */}
-          <Link
-            href="/"
-            className="font-black text-[14px] sm:text-[16px] md:text-[18px] tracking-tight text-navy uppercase"
-          >
-            QUANTUM<span className="text-navy">SLATE</span>
+          <Link href="/" className="flex items-center">
+            <img
+              src="/logo/quantumslate-logo.png"
+              alt="QuantumSlate"
+              className="h-4 sm:h-5 w-auto"
+            />
           </Link>
 
           {/* Desktop nav links */}
@@ -165,12 +166,12 @@ export default function Navbar() {
           >
             {/* Panel header */}
             <div className="flex items-center justify-between mb-14">
-              <Link
-                href="/"
-                onClick={closeMobile}
-                className="font-black text-[15px] tracking-tight text-navy uppercase"
-              >
-                QUANTUM<span className="text-navy">SLATE</span>
+              <Link href="/" onClick={closeMobile} className="flex items-center">
+                <img
+                  src="/logo/quantumslate-logo.png"
+                  alt="QuantumSlate"
+                  className="h-4 w-auto"
+                />
               </Link>
               <button
                 onClick={closeMobile}

@@ -8,7 +8,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { Box3, LoopRepeat, Vector3 } from "three";
-import type { AnimationClip, Group, Object3D } from "three";
+import type { AnimationClip, Group, Object3D, PerspectiveCamera } from "three";
 import { clone as skeletonClone } from "three/examples/jsm/utils/SkeletonUtils.js";
 
 export const DRONE_MODEL = "/3d-models/drone/scene.gltf";
@@ -48,6 +48,32 @@ export function normalize(scene: Object3D): Object3D {
   const center = new Box3().setFromObject(c).getCenter(new Vector3());
   c.position.sub(center);
   return c;
+}
+
+// Theatre keyframes frame the models for the desktop layout: docked left
+// (title on the right) and fairly high. On mobile the title lives below the
+// scene instead, so the model should spin in place at centre, nudged down
+// clear of the floating navbar. Each frame, counteract the e.group's authored
+// x — and add the downward nudge — on a static wrapper group AROUND it (the
+// e.group itself rotates, so offsetting inside it would swing the model on an
+// arm): portrait screens get the full correction (k=0), and it fades out as
+// the canvas widens until the authored framing at 16:9 (k=1). Call from the
+// model's useFrame with the inner group ref — expects <group> → <e.group> →
+// <group ref>.
+const AUTHORED_ASPECT = 16 / 9;
+const CENTERED_ASPECT = 1; // portrait and squarer: full correction
+// ponytail: eyeballed against iPhone-height viewports — model drops ~8% of the
+// canvas height, expressed at the model's own depth so all three scenes share it.
+const MOBILE_DROP_FRAC = 0.08;
+export function compensateDockX(group: Group, aspect: number, camera: PerspectiveCamera) {
+  const eGroup = group.parent;
+  const wrapper = eGroup?.parent;
+  if (!eGroup || !wrapper || (wrapper as { isScene?: boolean }).isScene) return;
+  const k = Math.min(1, Math.max(0, (aspect - CENTERED_ASPECT) / (AUTHORED_ASPECT - CENTERED_ASPECT)));
+  wrapper.position.x = (k - 1) * eGroup.position.x;
+  const viewHeight =
+    2 * (camera.position.z - eGroup.position.z) * Math.tan((camera.fov * Math.PI) / 360);
+  wrapper.position.y = (k - 1) * MOBILE_DROP_FRAC * viewHeight;
 }
 
 // A self-contained drone instance: its own normalized clone + the looping hover

@@ -177,11 +177,15 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 flex -translate-y-[10vh] flex-col items-center justify-center px-6 text-center">
         <h1
-          className={`break-words text-[clamp(1.75rem,8vw,7rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-all duration-1000 ease-out ${
+          className={`transition-all duration-1000 ease-out ${
             revealed ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          QUANTUMSLATE
+          <img
+            src="/logo/quantumslate-logo.png"
+            alt="QuantumSlate"
+            className="w-[clamp(16rem,72vw,56rem)]"
+          />
         </h1>
         <p
           className={`mt-6 max-w-[min(36rem,90vw)] text-[clamp(0.95rem,2.4vw,1.2rem)] leading-relaxed text-foreground/80 transition-all duration-1000 ease-out ${

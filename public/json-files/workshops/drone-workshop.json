@@ -54,6 +54,19 @@
                     ],
                     "type": "bezier",
                     "value": 0
+                  },
+                  {
+                    "id": "dockLeft0001",
+                    "position": 3.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -82
                   }
                 ]
               },
@@ -182,6 +195,32 @@
                     ],
                     "type": "bezier",
                     "value": 12.589999999999984
+                  },
+                  {
+                    "id": "dockSpin0001",
+                    "position": 3.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.33,
+                      0.33
+                    ],
+                    "type": "bezier",
+                    "value": 14.16
+                  },
+                  {
+                    "id": "loopSpin0001",
+                    "position": 7.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.67,
+                      0.67,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 20.443185307179586
                   }
                 ]
               },

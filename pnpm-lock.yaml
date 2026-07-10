@@ -4,22 +4,27 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@react-three/fiber@9.6.1':
+    hash: d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826
+    path: patches/@react-three__fiber@9.6.1.patch
+
 importers:
 
   .:
     dependencies:
       '@react-three/drei':
         specifier: ^10.7.7
-        version: 10.7.7(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@types/react@19.2.17)(@types/three@0.185.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
+        version: 10.7.7(@react-three/fiber@9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@types/react@19.2.17)(@types/three@0.185.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
       '@react-three/fiber':
         specifier: ^9.6.1
-        version: 9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
+        version: 9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
       '@theatre/core':
         specifier: ^0.7.2
         version: 0.7.2
       '@theatre/r3f':
         specifier: ^0.7.2
-        version: 0.7.2(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
+        version: 0.7.2(@react-three/fiber@9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
       '@theatre/studio':
         specifier: ^0.7.2
         version: 0.7.2(@theatre/core@0.7.2)
@@ -2694,12 +2699,12 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@react-three/drei@10.7.7(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@types/react@19.2.17)(@types/three@0.185.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
+  '@react-three/drei@10.7.7(@react-three/fiber@9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@types/react@19.2.17)(@types/three@0.185.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@mediapipe/tasks-vision': 0.10.17
       '@monogrid/gainmap-js': 3.4.0(three@0.185.0)
-      '@react-three/fiber': 9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
+      '@react-three/fiber': 9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
       '@use-gesture/react': 10.3.1(react@19.2.4)
       camera-controls: 3.1.2(three@0.185.0)
       cross-env: 7.0.3
@@ -2727,7 +2732,7 @@ snapshots:
       - '@types/three'
       - immer
 
-  '@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
+  '@react-three/fiber@9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@types/webxr': 0.5.24
@@ -2830,9 +2835,9 @@ snapshots:
     dependencies:
       lodash-es: 4.18.1
 
-  '@theatre/r3f@0.7.2(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
+  '@theatre/r3f@0.7.2(@react-three/fiber@9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)':
     dependencies:
-      '@react-three/fiber': 9.6.1(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
+      '@react-three/fiber': 9.6.1(patch_hash=d5688730e5643df665eba2d59a0e4ea369d8db4ed578ce84f6a36cf60a39e826)(@types/react@19.2.17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(three@0.185.0)
       '@theatre/core': 0.7.2
       '@theatre/studio': 0.7.2(@theatre/core@0.7.2)
       react: 19.2.4

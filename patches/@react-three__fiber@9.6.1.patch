@@ -1,0 +1,66 @@
+diff --git a/dist/events-583399dd.cjs.prod.js b/dist/events-583399dd.cjs.prod.js
+index f3834fa28aa8504b48da031e326acb332a722965..6812c1aad0f4bdbca70b45f55642ae95182ccf73 100644
+--- a/dist/events-583399dd.cjs.prod.js	
++++ b/dist/events-583399dd.cjs.prod.js	
+@@ -1038,7 +1038,16 @@ const createStore = (invalidate, advance) => {
+       linear: false,
+       flat: false,
+       controls: null,
+-      clock: new THREE__namespace.Clock(),
++      // patched: three r183 deprecated Clock (its constructor logs a warning);
++      // R3F migrates to Timer in v10. Build an identical Clock without running
++      // the constructor so consoles stay clean. Drop this patch on v10 upgrade.
++      clock: Object.assign(Object.create(THREE__namespace.Clock.prototype), {
++        autoStart: true,
++        startTime: 0,
++        oldTime: 0,
++        elapsedTime: 0,
++        running: false
++      }),
+       pointer,
+       mouse: pointer,
+       frameloop: 'always',
+diff --git a/dist/events-b389eeca.esm.js b/dist/events-b389eeca.esm.js
+index 76f308c96cb09a20e854133e48ec9ef7682edecc..c07bfd05775b66eb35996cd7a72cecc083306f03 100644
+--- a/dist/events-b389eeca.esm.js	
++++ b/dist/events-b389eeca.esm.js	
+@@ -1013,7 +1013,16 @@ const createStore = (invalidate, advance) => {
+       linear: false,
+       flat: false,
+       controls: null,
+-      clock: new THREE.Clock(),
++      // patched: three r183 deprecated Clock (its constructor logs a warning);
++      // R3F migrates to Timer in v10. Build an identical Clock without running
++      // the constructor so consoles stay clean. Drop this patch on v10 upgrade.
++      clock: Object.assign(Object.create(THREE.Clock.prototype), {
++        autoStart: true,
++        startTime: 0,
++        oldTime: 0,
++        elapsedTime: 0,
++        running: false
++      }),
+       pointer,
+       mouse: pointer,
+       frameloop: 'always',
+diff --git a/dist/events-f19bcc32.cjs.dev.js b/dist/events-f19bcc32.cjs.dev.js
+index 07d45d4c0bd7d57301d338040e8aa71c88fce7c5..d4ac5bae6a6fa40fe35fcce1ab5e90c3df8feaa4 100644
+--- a/dist/events-f19bcc32.cjs.dev.js	
++++ b/dist/events-f19bcc32.cjs.dev.js	
+@@ -1038,7 +1038,16 @@ const createStore = (invalidate, advance) => {
+       linear: false,
+       flat: false,
+       controls: null,
+-      clock: new THREE__namespace.Clock(),
++      // patched: three r183 deprecated Clock (its constructor logs a warning);
++      // R3F migrates to Timer in v10. Build an identical Clock without running
++      // the constructor so consoles stay clean. Drop this patch on v10 upgrade.
++      clock: Object.assign(Object.create(THREE__namespace.Clock.prototype), {
++        autoStart: true,
++        startTime: 0,
++        oldTime: 0,
++        elapsedTime: 0,
++        running: false
++      }),
+       pointer,
+       mouse: pointer,
+       frameloop: 'always',

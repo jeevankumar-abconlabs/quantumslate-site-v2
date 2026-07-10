@@ -31,11 +31,12 @@ export default function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           {/* Brand */}
           <div className="max-w-sm">
-            <Link
-              href="/"
-              className="font-unbounded font-black uppercase tracking-tighter text-navy"
-            >
-              QUANTUM<span className="text-navy/60">SLATE</span>
+            <Link href="/" className="inline-flex">
+              <img
+                src="/logo/quantumslate-logo.png"
+                alt="QuantumSlate"
+                className="h-5 w-auto"
+              />
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-foreground/60">
               Pioneering the future of aerospace innovation through hands-on

@@ -20,19 +20,18 @@ const SLIDES = [
 export default function Defence() {
   const n = SLIDES.length;
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const reduce = useReducedMotion();
 
   // Wrap-around navigation so the ring loops seamlessly in either direction.
   const go = (i: number) => setActive(((i % n) + n) % n);
 
   // Auto-advance every 3s. Re-arms on each `active` change, so manual nav also
-  // resets the clock. Pauses on hover/focus and for reduced-motion users.
+  // resets the clock. Pauses only for reduced-motion users.
   useEffect(() => {
-    if (paused || reduce) return;
+    if (reduce) return;
     const t = setTimeout(() => setActive((a) => (a + 1) % n), 3000);
     return () => clearTimeout(t);
-  }, [active, paused, reduce, n]);
+  }, [active, reduce, n]);
 
   return (
     // overflow-x-clip: side cards translate past the viewport edge; clip them
@@ -53,10 +52,6 @@ export default function Defence() {
           className="relative mt-14 flex h-[clamp(260px,42vw,460px)] items-center justify-center [perspective:1600px]"
           role="group"
           aria-roledescription="carousel"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={() => setPaused(false)}
         >
           <div className="relative h-full w-[clamp(240px,52vw,440px)] [transform-style:preserve-3d]">
             {SLIDES.map((slide, i) => {
@@ -91,9 +86,6 @@ export default function Defence() {
                 >
                   {/* Photo placeholder — swap for <Image src={...} alt={slide.alt} fill className="object-cover" /> */}
                   <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(241,232,218,0.14)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,232,218,0.14)_1px,transparent_1px)] bg-[size:30px_30px]" />
-                  <span className="pointer-events-none absolute bottom-4 left-5 text-[11px] font-medium uppercase tracking-widest text-background/40">
-                    {slide.alt}
-                  </span>
                 </motion.button>
               );
             })}
