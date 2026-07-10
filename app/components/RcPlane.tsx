@@ -36,8 +36,6 @@ function Plane() {
 
     if (!group.current) return;
     compensateDockX(group.current, state.viewport.aspect, state.camera as ThreePerspectiveCamera);
-    group.current.rotation.y += (state.pointer.x * 0.15 - group.current.rotation.y) * 0.05;
-    group.current.rotation.x += (-state.pointer.y * 0.1 - group.current.rotation.x) * 0.05;
   });
 
   return (

@@ -196,7 +196,7 @@ export default function Navbar() {
                     <>
                       <button
                         onClick={() => setMobileSub(mobileSub === link.name ? null : link.name)}
-                        className="w-full flex items-center justify-between py-4 font-unbounded font-black text-[2.6rem] sm:text-[3.2rem] leading-none text-navy hover:text-navy/70 transition-colors duration-200 cursor-pointer text-left"
+                        className="w-full flex items-center justify-between py-4 font-unbounded font-black text-[1.9rem] sm:text-[2.4rem] leading-none text-navy hover:text-navy/70 transition-colors duration-200 cursor-pointer text-left"
                         aria-expanded={mobileSub === link.name}
                       >
                         <span>{link.name}</span>
@@ -220,7 +220,7 @@ export default function Navbar() {
                                   key={child.name}
                                   href={child.href}
                                   onClick={closeMobile}
-                                  className="font-unbounded font-bold text-xl sm:text-2xl text-navy/55 hover:text-navy py-2.5 transition-colors duration-200"
+                                  className="font-unbounded font-bold text-lg sm:text-xl text-navy/55 hover:text-navy py-2.5 transition-colors duration-200"
                                 >
                                   {child.name}
                                 </Link>
@@ -234,7 +234,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMobile}
-                      className="block py-4 font-unbounded font-black text-[2.6rem] sm:text-[3.2rem] leading-none text-navy hover:text-navy/70 transition-colors duration-200"
+                      className="block py-4 font-unbounded font-black text-[1.9rem] sm:text-[2.4rem] leading-none text-navy hover:text-navy/70 transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
