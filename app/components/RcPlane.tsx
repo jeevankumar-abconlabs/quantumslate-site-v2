@@ -7,7 +7,7 @@ import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import type { Group, PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { rcPlaneProject, rcPlaneSheet, STUDIO_ENABLED } from "../theatre/rcplane";
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
-import { compensateDockX, normalize } from "./droneInstance";
+import { compensateDockX, modelScale, normalize } from "./droneInstance";
 
 const PLANE_MODEL = "/3d-models/rcplane/scene.gltf";
 // Intro: spin at centre (0→3.7), then dock to the left (→4.7). After that the
@@ -26,8 +26,11 @@ function Plane() {
   // The GLTF's spinning part is the "propeller" node — spin it about its own hub.
   const propeller = useMemo(() => object.getObjectByName("propeller"), [object]);
 
-  const width = useThree((s) => s.viewport.width);
-  const scale = Math.min(0.9, Math.max(0.5, width / 6));
+  // Scale follows the framing: proportional to the desktop composition on md+,
+  // world-unit clamp on phones (see modelScale).
+  const size = useThree((s) => s.size);
+  const worldWidth = useThree((s) => s.viewport.width);
+  const scale = modelScale(size, worldWidth);
 
   useFrame((state, delta) => {
     // ponytail: spin knob — bump speed, or switch to .x/.y if it tumbles instead
@@ -35,7 +38,7 @@ function Plane() {
     if (propeller) propeller.rotation.y += delta * 25;
 
     if (!group.current) return;
-    compensateDockX(group.current, state.viewport.aspect, state.camera as ThreePerspectiveCamera);
+    compensateDockX(group.current, state.size, state.camera as ThreePerspectiveCamera);
   });
 
   return (
@@ -101,7 +104,7 @@ export default function RcPlane({
           mobile shows the WorkshopTitle section below the scene instead). */}
       <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
         <h1
-          className={`text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
+          className={`text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
             introDone ? "opacity-100" : "opacity-0"
           }`}
         >

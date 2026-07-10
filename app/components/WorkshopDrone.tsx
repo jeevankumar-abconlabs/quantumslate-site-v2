@@ -7,7 +7,7 @@ import type { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import { workshopProject, workshopSheet, STUDIO_ENABLED } from "../theatre/workshop";
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
-import { compensateDockX, useDroneInstance } from "./droneInstance";
+import { compensateDockX, modelScale, useDroneInstance } from "./droneInstance";
 
 // Intro: fly in at centre (0→2.967), then dock to the left (→3.967). After that
 // the [3.967, 7.967] segment (one slow full turn while docked) loops forever.
@@ -19,14 +19,15 @@ const LOOP_END = 7.967;
 // parallax layered on top of the authored hover.
 function Drone() {
   const { group, object } = useDroneInstance();
-  // viewport.width is in world units, so it's smaller on narrow phones — a lower
-  // floor shrinks the drone there while desktop still caps at 0.9.
-  const width = useThree((s) => s.viewport.width);
-  const scale = Math.min(0.9, Math.max(0.5, width / 6));
+  // Scale follows the framing: proportional to the desktop composition on md+,
+  // world-unit clamp on phones (see modelScale).
+  const size = useThree((s) => s.size);
+  const worldWidth = useThree((s) => s.viewport.width);
+  const scale = modelScale(size, worldWidth);
 
   useFrame((state) => {
     if (!group.current) return;
-    compensateDockX(group.current, state.viewport.aspect, state.camera as ThreePerspectiveCamera);
+    compensateDockX(group.current, state.size, state.camera as ThreePerspectiveCamera);
   });
 
   return (
@@ -91,7 +92,7 @@ export default function WorkshopDrone({
           mobile shows the WorkshopTitle section below the scene instead). */}
       <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
         <h1
-          className={`text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
+          className={`text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
             introDone ? "opacity-100" : "opacity-0"
           }`}
         >

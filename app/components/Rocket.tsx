@@ -7,7 +7,7 @@ import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import type { Group, PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { rocketProject, rocketSheet, STUDIO_ENABLED } from "../theatre/rocket";
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
-import { compensateDockX, normalize } from "./droneInstance";
+import { compensateDockX, modelScale, normalize, phoneFreeBand } from "./droneInstance";
 import Preloader from "./Preloader";
 
 // Intro: spin at centre (0→2.967), then dock to the left (→3.967). After that
@@ -25,12 +25,29 @@ function Rocket() {
   const { scene } = useGLTF(ROCKET_MODEL);
   const object = useMemo(() => normalize(scene), [scene]);
 
-  const width = useThree((s) => s.viewport.width);
-  const scale = Math.min(0.9, Math.max(0.5, width / 6));
+  // Scale follows the framing: proportional to the desktop composition on md+,
+  // world-unit clamp on phones (see modelScale). The rocket is a TALL model
+  // (its normalized 1-unit max-dim is the length), so on phones additionally
+  // cap the scale to the free band between the navbar and the scroll pill, and
+  // centre it in that band — otherwise the nose slides under the navbar.
+  // ponytail: 5 = this scene's theatre-authored e.group scale.
+  const size = useThree((s) => s.size);
+  const worldWidth = useThree((s) => s.viewport.width);
+  const worldHeight = useThree((s) => s.viewport.height);
+  const band = phoneFreeBand(size);
+  const scale = Math.min(
+    modelScale(size, worldWidth),
+    band ? (band.heightFrac * worldHeight) / 5 : Infinity,
+  );
 
   useFrame((state) => {
     if (!group.current) return;
-    compensateDockX(group.current, state.viewport.aspect, state.camera as ThreePerspectiveCamera);
+    compensateDockX(
+      group.current,
+      state.size,
+      state.camera as ThreePerspectiveCamera,
+      phoneFreeBand(state.size)?.centerShift,
+    );
   });
 
   return (
@@ -100,7 +117,7 @@ export default function Rocket3D({
           mobile shows the WorkshopTitle section below the scene instead). */}
       <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
         <h1
-          className={`text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
+          className={`text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
             introDone ? "opacity-100" : "opacity-0"
           }`}
         >

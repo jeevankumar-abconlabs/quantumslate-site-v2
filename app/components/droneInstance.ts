@@ -50,30 +50,83 @@ export function normalize(scene: Object3D): Object3D {
   return c;
 }
 
-// Theatre keyframes frame the models for the desktop layout: docked left
-// (title on the right) and fairly high. On mobile the title lives below the
-// scene instead, so the model should spin in place at centre, nudged down
-// clear of the floating navbar. Each frame, counteract the e.group's authored
-// x — and add the downward nudge — on a static wrapper group AROUND it (the
-// e.group itself rotates, so offsetting inside it would swing the model on an
-// arm): portrait screens get the full correction (k=0), and it fades out as
-// the canvas widens until the authored framing at 16:9 (k=1). Call from the
-// model's useFrame with the inner group ref — expects <group> → <e.group> →
-// <group ref>.
+// ── Responsive scene framing ─────────────────────────────────────────────
+// The theatre keyframes are authored for a 16:9 desktop. The CSS layout
+// switches at Tailwind's `md` breakpoint, and the scene framing follows the
+// SAME breakpoint (computed from the canvas CSS size, which spans the
+// viewport) so the two can never disagree:
+//  - phones (<768px wide): the title lives BELOW the scene, so the model
+//    spins in place at centre, nudged down clear of the floating navbar;
+//  - md+ (tablets & desktops): the desktop dock-left framing, with the dock
+//    offset and model scale multiplied by `desktopness` — how the viewport's
+//    aspect compares to the authored 16:9 — so a portrait iPad shows the same
+//    composition as desktop, just proportionally narrower. Nothing clips and
+//    the model never overlaps the in-scene title.
 const AUTHORED_ASPECT = 16 / 9;
-const CENTERED_ASPECT = 1; // portrait and squarer: full correction
-// ponytail: eyeballed against iPhone-height viewports — model drops ~8% of the
-// canvas height, expressed at the model's own depth so all three scenes share it.
-const MOBILE_DROP_FRAC = 0.08;
-export function compensateDockX(group: Group, aspect: number, camera: PerspectiveCamera) {
+const MD_BREAKPOINT = 768; // keep in sync with Tailwind's `md:`
+export function desktopness(size: { width: number; height: number }) {
+  if (size.width < MD_BREAKPOINT) return 0;
+  return Math.min(1, size.width / size.height / AUTHORED_ASPECT);
+}
+
+// Scale for the inner model group: the authored desktop 0.9 shrinks with the
+// framing on md+; phones keep the world-unit clamp (bigger floor so the model
+// still reads on small screens).
+export function modelScale(
+  size: { width: number; height: number },
+  worldWidth: number,
+) {
+  const k = desktopness(size);
+  return k > 0 ? 0.9 * k : Math.min(0.9, Math.max(0.5, worldWidth / 6));
+}
+
+// Phone framing: the canvas is 70dvh tall and bottom-anchored inside a 55dvh
+// section, so its top 15dvh is cropped away. Centre the model in the VISIBLE
+// strip: shift it down from the canvas centre by half the crop (as a fraction
+// of canvas height), after cancelling the model's authored y. Keep the dvh
+// numbers in sync with the scene components' h-[70dvh] / h-[55dvh] classes.
+const CANVAS_DVH = 70;
+const SECTION_DVH = 55;
+const MOBILE_CENTER_SHIFT = (CANVAS_DVH - SECTION_DVH) / (2 * CANVAS_DVH);
+
+// Free vertical band on the phone strip between the floating navbar and the
+// scroll pill — for TALL models (the rocket) that must fit between the two.
+// Returns canvas-height fractions; null on md+, where the desktop framing has
+// room. ponytail: px overlays eyeballed from the rendered navbar/pill sizes.
+const NAVBAR_PX = 88;
+const PILL_PX = 84;
+export function phoneFreeBand(size: { width: number; height: number }) {
+  if (desktopness(size) > 0) return null;
+  const crop = size.height * ((CANVAS_DVH - SECTION_DVH) / CANVAS_DVH);
+  const top = crop + NAVBAR_PX;
+  const bottom = size.height - PILL_PX;
+  return {
+    centerShift: (top + bottom) / 2 / size.height - 0.5,
+    heightFrac: (bottom - top) / size.height,
+  };
+}
+
+// Apply the framing each frame on a static wrapper group AROUND the theatre
+// e.group (the e.group itself rotates, so offsetting inside it would swing
+// the model on an arm). Call from the model's useFrame with the inner group
+// ref — expects <group> → <e.group> → <group ref>.
+export function compensateDockX(
+  group: Group,
+  size: { width: number; height: number },
+  camera: PerspectiveCamera,
+  centerShift?: number, // phone vertical placement override (rocket fit)
+) {
   const eGroup = group.parent;
   const wrapper = eGroup?.parent;
   if (!eGroup || !wrapper || (wrapper as { isScene?: boolean }).isScene) return;
-  const k = Math.min(1, Math.max(0, (aspect - CENTERED_ASPECT) / (AUTHORED_ASPECT - CENTERED_ASPECT)));
+  const k = desktopness(size);
   wrapper.position.x = (k - 1) * eGroup.position.x;
   const viewHeight =
     2 * (camera.position.z - eGroup.position.z) * Math.tan((camera.fov * Math.PI) / 360);
-  wrapper.position.y = (k - 1) * MOBILE_DROP_FRAC * viewHeight;
+  wrapper.position.y =
+    k > 0
+      ? 0
+      : -eGroup.position.y - (centerShift ?? MOBILE_CENTER_SHIFT) * viewHeight;
 }
 
 // A self-contained drone instance: its own normalized clone + the looping hover
