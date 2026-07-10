@@ -3,21 +3,21 @@
 // Each card links to its workshop page; the Drones card opens the 3D drone scene.
 import Link from "next/link";
 
-const WORKSHOPS = [
+export const WORKSHOPS = [
   {
     title: "Drones",
     href: "/workshops/drones",
-    body: "Build your own drone from the frame up — wire the motors, set it up, and take it through its very first flight.",
+    body: "Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics.",
   },
   {
     title: "RC Planes",
     href: "/workshops/rc-planes",
-    body: "Design, build, and trim your own aircraft, then take it from nervous maiden flight to confident aerobatic rolls.",
+    body: "Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the final showdown.",
   },
   {
     title: "Model Rockets",
     href: "/workshops/rockets",
-    body: "Engineer a real rocket from the airframe up, wire its recovery system, and put it to the test with a live countdown launch.",
+    body: "Engineer a real rocket — fins, motor, parachute recovery — and send it up with a live countdown launch.",
   },
 ];
 
@@ -32,9 +32,9 @@ export default function Workshops() {
           Three hands-on builds. One journey from blueprint to lift-off.
         </p>
         <p className="mt-4 max-w-2xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-          Choose your craft — racing drones, RC planes, or model rockets — and
-          learn to design, build, and fly the real thing. No prior experience
-          needed, just the curiosity to make something that flies.
+          Hands-on aerospace workshops for students, engineers, and hobbyists —
+          drone building, RC plane design, and model rocketry. Learn to design,
+          build, and fly the real thing. No prior experience needed.
         </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

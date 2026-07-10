@@ -1,8 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import WorkshopTitle from "./WorkshopTitle";
+import { WORKSHOPS } from "./Workshops";
 
 // The three workshop 3D scenes, reused verbatim on the home page. Dynamic +
 // ssr:false keeps their three.js/theatre chunks (and each component's
@@ -74,17 +76,42 @@ function LazyStage({
   );
 }
 
+// Short two-line teaser below each animation — same copy as the Workshops
+// cards (imported so they never drift) — with a Learn More button to the
+// workshop's dedicated page, where the detailed content lives.
+function WorkshopBlurb({ index }: { index: number }) {
+  const { body, href } = WORKSHOPS[index];
+  return (
+    <section className="flex w-full flex-col items-center px-6 pb-16 pt-2 text-center md:pb-24">
+      <p className="max-w-xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
+        {body}
+      </p>
+      <Link
+        href={href}
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-gold hover:text-navy"
+      >
+        Learn More
+        <span aria-hidden="true">→</span>
+      </Link>
+    </section>
+  );
+}
+
 export default function HomeShowcase() {
   return (
     <>
       {/* md+: titles live inside each scene (model docks left, title on the
-          right). Mobile: WorkshopTitle shows each title below its scene. */}
+          right). Mobile: WorkshopTitle shows each title below its scene.
+          Each scene is followed by a two-line blurb + Learn More button. */}
       <LazyStage Scene={WorkshopDrone} />
       <WorkshopTitle label="Drones" />
+      <WorkshopBlurb index={0} />
       <LazyStage Scene={RcPlane} />
       <WorkshopTitle label="RC Planes" />
+      <WorkshopBlurb index={1} />
       <LazyStage Scene={Rocket3D} />
       <WorkshopTitle label="Rockets" />
+      <WorkshopBlurb index={2} />
     </>
   );
 }

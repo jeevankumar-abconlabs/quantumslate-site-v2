@@ -16,37 +16,60 @@ const TILE_SPANS = [
 
 type Step = { title: string; body: string; finale?: boolean };
 
-// ponytail: placeholder copy — swap for the exact descriptions when they land.
 const WORKSHOPS = {
   drones: {
     title: "Drone",
     blurb:
-      "Build your own drone from the frame up — wire the motors, set it up, and take it through its very first flight. No prior experience needed, just the curiosity to make something that flies. Over the workshop you go from raw components to a machine you fly yourself, ending with a head-to-head Drone Olympics.",
+      "QuantumSlate's hands-on drone building workshop takes you from a box of raw components to a quadcopter you pilot yourself. Guided by the same engineers who design UAVs and tethered surveillance systems for defence and police units across India, you assemble the airframe, wire the motors and ESCs, configure the flight controller, and take your machine through its very first flight.",
+    intro:
+      "Along the way you pick up real UAV engineering skills — aerodynamics, embedded electronics, firmware configuration, and safe flight operations — the same fundamentals our team applies on mission-deployed aerial systems. No prior experience needed; the workshop is open to school students, engineering undergraduates, and hobbyists alike. It all builds up to the Drone Olympics, our flagship head-to-head flying showdown.",
+    skills: [
+      "Drone anatomy & airframe assembly",
+      "Motor, ESC & flight-controller wiring",
+      "Firmware setup & calibration",
+      "Piloting & flight safety",
+    ],
     timeline: [
-      { title: "Fundamentals & Frame Build", body: "Learn how drones fly, then assemble the airframe from the frame up." },
-      { title: "Electronics & Wiring", body: "Wire the motors, ESCs, and flight controller, and configure the firmware." },
-      { title: "Calibration & First Flight", body: "Tune and calibrate your build, then take it through its very first flight." },
+      { title: "Fundamentals & Frame Build", body: "How drones generate lift and stay stable — propellers, thrust, and control loops — then assemble your airframe from the frame up." },
+      { title: "Electronics & Wiring", body: "Wire the motors, ESCs, and flight controller, solder the power distribution, and flash and configure the firmware." },
+      { title: "Calibration & First Flight", body: "Calibrate sensors, tune the controls, run pre-flight checks, and take your build through hover, climb, and landing." },
       { title: "Drone Olympics", body: "Put your machine to the test against the rest in our flagship flying showdown.", finale: true },
     ] as Step[],
   },
   "rc-planes": {
     title: "RC Planes",
     blurb:
-      "Design, build, and trim your own aircraft — from picking the wing that suits your mission to balancing it for stable flight. Then take it from a nervous maiden flight to confident aerobatic rolls, learning what every control surface does the way pilots do: stick in hand.",
+      "Learn aerodynamics the way pilots and aircraft designers do — by building a radio-controlled plane and flying it. In QuantumSlate's RC plane workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
+    intro:
+      "Every session is grounded in real aerospace engineering: lift and drag, control surfaces, centre of gravity, and trim — concepts you feel through the transmitter sticks, not slides. By the finale you're flying rolls, loops, and precision passes in the aerobatics showdown, with an aircraft you built yourself.",
+    skills: [
+      "Aerodynamics & aircraft design",
+      "Airframe construction — fuselage, wings & tail",
+      "Servo, receiver & motor installation",
+      "Trimming, take-off & landing",
+    ],
     timeline: [
-      { title: "Aerodynamics & Airframe Build", body: "Learn why planes fly, then build the fuselage, wings, and tail from scratch." },
-      { title: "Control Surfaces & Electronics", body: "Fit the servos, receiver, and motor, and link every surface to your transmitter." },
-      { title: "Trim & Maiden Flight", body: "Balance the aircraft, set your throws, and take it through its first take-off and landing." },
+      { title: "Aerodynamics & Airframe Build", body: "Why planes fly — lift, drag, thrust, and stability — then build the fuselage, wings, and tail from scratch." },
+      { title: "Control Surfaces & Electronics", body: "Fit the servos, receiver, and motor, and link ailerons, elevator, and rudder to your transmitter." },
+      { title: "Trim & Maiden Flight", body: "Balance the centre of gravity, set your control throws, and take your aircraft through its first take-off and landing." },
       { title: "Aerobatics Showdown", body: "Rolls, loops, and precision passes — put your airmanship to the test against the field.", finale: true },
     ] as Step[],
   },
   rockets: {
     title: "Rockets",
     blurb:
-      "Engineer a real rocket from the airframe up — shape the fins, pack the recovery system, and wire the ignition. Every build ends the same way: on the pad, with a live countdown, and a machine you made climbing off the rail.",
+      "QuantumSlate's model rocketry workshop puts a real launch at the end of every build. You engineer a rocket from the airframe up — shape the fins for stability, build the body and nose cone, mount the motor, and pack the parachute recovery system — then clear it through pad checks for a live countdown launch.",
+    intro:
+      "The physics behind spaceflight — thrust, stability, apogee, recovery — taught hands-on, the way aerospace engineers actually work. You build it, you launch it, and you recover what you flew. Open to students and enthusiasts of every level; curiosity is the only prerequisite.",
+    skills: [
+      "Rocket stability & fin design",
+      "Airframe & nose-cone construction",
+      "Motor mounting & parachute recovery",
+      "Launch operations & range safety",
+    ],
     timeline: [
-      { title: "Rocketry Fundamentals & Airframe", body: "Learn what makes rockets stable, then build the body, fins, and nose cone." },
-      { title: "Motors & Recovery Systems", body: "Mount the motor, pack the parachute, and rig the recovery so it comes home intact." },
+      { title: "Rocketry Fundamentals & Airframe", body: "What keeps a rocket stable in flight — centre of pressure vs. gravity — then build the body, fins, and nose cone." },
+      { title: "Motors & Recovery Systems", body: "Mount the motor, pack the parachute, and rig the recovery so your rocket comes home intact." },
       { title: "Integration & Pad Checks", body: "Assemble, weigh, and safety-check the full stack until it's cleared for flight." },
       { title: "Launch Day", body: "A live countdown, a hard climb off the rail, and a recovery you rigged yourself.", finale: true },
     ] as Step[],
@@ -54,7 +77,7 @@ const WORKSHOPS = {
 };
 
 export default function WorkshopDetails({ workshop }: { workshop: keyof typeof WORKSHOPS }) {
-  const { title, blurb, timeline } = WORKSHOPS[workshop];
+  const { title, blurb, intro, skills, timeline } = WORKSHOPS[workshop];
 
   return (
     <section className="w-full">
@@ -67,6 +90,9 @@ export default function WorkshopDetails({ workshop }: { workshop: keyof typeof W
             </h2>
             <p className="mt-5 text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
               {blurb}
+            </p>
+            <p className="mt-4 text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
+              {intro}
             </p>
             <Link
               href="/contact"
@@ -120,6 +146,23 @@ export default function WorkshopDetails({ workshop }: { workshop: keyof typeof W
               </li>
             ))}
           </ol>
+        </div>
+
+        {/* ── Skills — what participants walk away with ── */}
+        <div className="mt-24 md:mt-32">
+          <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-black uppercase tracking-tight text-navy">
+            What You&apos;ll Take Away
+          </h3>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+            {skills.map((skill) => (
+              <li
+                key={skill}
+                className="border border-navy/10 bg-navy/[0.03] px-6 py-5 text-[clamp(0.95rem,1.4vw,1.05rem)] font-semibold text-navy"
+              >
+                {skill}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
