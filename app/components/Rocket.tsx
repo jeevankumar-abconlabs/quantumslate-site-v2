@@ -8,6 +8,7 @@ import type { Group, PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { rocketProject, rocketSheet, STUDIO_ENABLED } from "../theatre/rocket";
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
 import { compensateDockX, modelScale, normalize, phoneFreeBand } from "./droneInstance";
+import FadingGrid from "./FadingGrid";
 import Preloader from "./Preloader";
 
 // Intro: spin at centre (0→2.967), then dock to the left (→3.967). After that
@@ -89,6 +90,7 @@ export default function Rocket3D({
     // Mobile: section shorter than the bottom-anchored canvas, cropping the
     // camera's dead space off the top. Desktop: canvas fills the section.
     <section className="relative h-[55dvh] w-full overflow-hidden md:h-[100dvh]">
+      <FadingGrid />
       {mounted && (
         <div className="absolute inset-x-0 bottom-0 h-[70dvh] md:inset-0 md:h-auto">
         <Canvas dpr={[1, 2]} frameloop={paused ? "never" : "always"}>
@@ -113,20 +115,16 @@ export default function Rocket3D({
       {/* Heavy model — cover the scene with a percentage preloader until it's in. */}
       {mounted && <Preloader label="Rockets" onReady={() => setLoaded(true)} />}
 
-      {/* Title fades in on the right once the rocket has docked left (md+ only —
-          mobile shows the WorkshopTitle section below the scene instead). */}
-      <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
-        <h1
-          className={`text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
-            introDone ? "opacity-100" : "opacity-0"
-          }`}
-        >
+      {/* Title + scroll cue fade in on the right once the rocket has docked left
+          (md+ only — mobile shows the WorkshopTitle section below the scene instead). */}
+      <div
+        className={`pointer-events-none absolute inset-y-0 right-6 hidden flex-col items-center justify-center gap-6 transition-opacity duration-700 md:flex md:right-[20%] ${
+          introDone ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <h1 className="text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           Rockets
         </h1>
-      </div>
-
-      {/* Scroll cue — a bright pill button. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
         <span className="flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-navy/30">
           Scroll
           <span className="animate-bounce text-base leading-none">↓</span>

@@ -89,17 +89,26 @@ const CANVAS_DVH = 70;
 const SECTION_DVH = 55;
 const MOBILE_CENTER_SHIFT = (CANVAS_DVH - SECTION_DVH) / (2 * CANVAS_DVH);
 
-// Free vertical band on the phone strip between the floating navbar and the
-// scroll pill — for TALL models (the rocket) that must fit between the two.
-// Returns canvas-height fractions; null on md+, where the desktop framing has
-// room. ponytail: px overlays eyeballed from the rendered navbar/pill sizes.
+// Phone-only: sit the flat, wide models (drone, plane) well below the strip
+// centre — dead-centred under the navbar they read as floating too high.
+// ponytail: eyeballed fraction of canvas height (~9dvh of the 70dvh canvas).
+const PHONE_NUDGE_DOWN = 0.13;
+export const PHONE_LOW_CENTER = MOBILE_CENTER_SHIFT + PHONE_NUDGE_DOWN;
+
+// Free vertical band on the phone strip below the floating navbar — for TALL
+// models (the rocket) whose nose would otherwise slide under it. The band
+// runs to the bottom of the strip (the scroll cue lives below the scene, in
+// WorkshopTitle), buying a much larger rocket whose centre sits lower, nudged
+// down away from the navbar. Returns canvas-height fractions; null on md+,
+// where the desktop framing has room.
+// ponytail: navbar px eyeballed from the rendered floating navbar.
 const NAVBAR_PX = 88;
-const PILL_PX = 84;
+const BOTTOM_MARGIN_PX = 12;
 export function phoneFreeBand(size: { width: number; height: number }) {
   if (desktopness(size) > 0) return null;
   const crop = size.height * ((CANVAS_DVH - SECTION_DVH) / CANVAS_DVH);
   const top = crop + NAVBAR_PX;
-  const bottom = size.height - PILL_PX;
+  const bottom = size.height - BOTTOM_MARGIN_PX;
   return {
     centerShift: (top + bottom) / 2 / size.height - 0.5,
     heightFrac: (bottom - top) / size.height,

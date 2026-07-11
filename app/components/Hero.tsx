@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import DroneModel from "./DroneModel";
+import FadingGrid from "./FadingGrid";
 import { project, sheet, STUDIO_ENABLED } from "../theatre/drone";
 import { heroProject, heroSheet } from "../theatre/hero";
 import { introState } from "../introState";
@@ -117,20 +118,7 @@ export default function Hero() {
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#F1E8DA]">
-      {/* Fading grid background */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, var(--navy) 1px, transparent 1px), linear-gradient(to bottom, var(--navy) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          opacity: 0.14,
-          maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%)",
-        }}
-      />
+      <FadingGrid />
 
       {/* ponytail: hero background image removed for now — it interfered with
           the intro animation lock. Re-add the orientation-based <Image> pair

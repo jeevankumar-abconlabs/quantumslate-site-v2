@@ -7,7 +7,8 @@ import { SheetProvider, editable as e, PerspectiveCamera } from "@theatre/r3f";
 import type { Group, PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { rcPlaneProject, rcPlaneSheet, STUDIO_ENABLED } from "../theatre/rcplane";
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
-import { compensateDockX, modelScale, normalize } from "./droneInstance";
+import { compensateDockX, modelScale, normalize, PHONE_LOW_CENTER } from "./droneInstance";
+import FadingGrid from "./FadingGrid";
 
 const PLANE_MODEL = "/3d-models/rcplane/scene.gltf";
 // Intro: spin at centre (0→3.7), then dock to the left (→4.7). After that the
@@ -38,7 +39,12 @@ function Plane() {
     if (propeller) propeller.rotation.y += delta * 25;
 
     if (!group.current) return;
-    compensateDockX(group.current, state.size, state.camera as ThreePerspectiveCamera);
+    compensateDockX(
+      group.current,
+      state.size,
+      state.camera as ThreePerspectiveCamera,
+      PHONE_LOW_CENTER,
+    );
   });
 
   return (
@@ -79,6 +85,7 @@ export default function RcPlane({
     // Mobile: section shorter than the bottom-anchored canvas, cropping the
     // camera's dead space off the top. Desktop: canvas fills the section.
     <section className="relative h-[55dvh] w-full overflow-hidden md:h-[100dvh]">
+      <FadingGrid />
       {mounted && (
         <div className="absolute inset-x-0 bottom-0 h-[70dvh] md:inset-0 md:h-auto">
         <Canvas dpr={[1, 2]} frameloop={paused ? "never" : "always"}>
@@ -100,20 +107,16 @@ export default function RcPlane({
         </div>
       )}
 
-      {/* Title fades in on the right once the plane has docked left (md+ only —
-          mobile shows the WorkshopTitle section below the scene instead). */}
-      <div className="pointer-events-none absolute inset-y-0 right-6 hidden items-center md:flex md:right-[20%]">
-        <h1
-          className={`text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy transition-opacity duration-700 ${
-            introDone ? "opacity-100" : "opacity-0"
-          }`}
-        >
+      {/* Title + scroll cue fade in on the right once the plane has docked left
+          (md+ only — mobile shows the WorkshopTitle section below the scene instead). */}
+      <div
+        className={`pointer-events-none absolute inset-y-0 right-6 hidden flex-col items-center justify-center gap-6 transition-opacity duration-700 md:flex md:right-[20%] ${
+          introDone ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <h1 className="text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           RC Planes
         </h1>
-      </div>
-
-      {/* Scroll cue — a bright pill button. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
         <span className="flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-navy/30">
           Scroll
           <span className="animate-bounce text-base leading-none">↓</span>
