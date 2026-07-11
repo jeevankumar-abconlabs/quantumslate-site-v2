@@ -65,7 +65,8 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-16">
+          {/* Last column sizes to its content so the email never wraps. */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-[1fr_1fr_auto] sm:gap-16">
             {COLUMNS.map(({ heading, links }) => (
               <div key={heading} className="flex flex-col gap-3">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-navy/50">
@@ -89,7 +90,7 @@ export default function Footer() {
               </h4>
               <a
                 href="mailto:quantumslateofficial@gmail.com"
-                className="break-words text-sm text-foreground/70 transition-colors hover:text-navy"
+                className="whitespace-nowrap text-sm text-foreground/70 transition-colors hover:text-navy"
               >
                 quantumslateofficial@gmail.com
               </a>
