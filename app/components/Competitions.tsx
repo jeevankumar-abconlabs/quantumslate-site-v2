@@ -6,6 +6,8 @@
 // site's engineering-grid motif — drop real photos into /public/competitions
 // and swap each placeholder <div> for <Image ... fill className="object-cover" />.
 
+import Image from "next/image";
+
 const DISCIPLINES = [
   {
     name: "Drone Racing",
@@ -29,21 +31,19 @@ export default function Competitions() {
   return (
     <section id="competitions" className="w-full px-6 py-6 md:px-12 md:py-8">
       <div className="mx-auto max-w-6xl">
-        {/* ── Title band: group photo behind the heading ── */}
-        <div className="relative overflow-hidden bg-navy">
-          {/* Group photo goes here — sits behind the title at reduced opacity,
-              echoing the hero. Replace this placeholder with the real photo:
-              <Image src="/competitions/group.jpg" alt="" fill priority
-                     className="object-cover opacity-40" /> */}
-          <div className="pointer-events-none absolute inset-0 opacity-[0.18] bg-[linear-gradient(to_right,rgba(241,232,218,0.25)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,232,218,0.25)_1px,transparent_1px)] bg-[size:32px_32px]" />
-          <span className="pointer-events-none absolute bottom-5 right-6 text-[11px] font-medium uppercase tracking-widest text-background/30">
-            Group Photo
-          </span>
-
-          <div className="relative flex min-h-[calc(100dvh-9.5rem)] flex-col items-center justify-center px-6 py-20 text-center">
-            <h1 className="max-w-4xl text-[clamp(2rem,7vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight text-background">
-              National Level Competitions
-            </h1>
+        {/* ── Title band: full-width navy bar on top, untouched photo below ── */}
+        <div>
+          <h1 className="whitespace-nowrap bg-navy px-5 py-4 text-center text-[clamp(1.1rem,4.3vw,3.25rem)] font-black uppercase leading-none tracking-tight text-background md:px-10 md:py-7">
+            National Level Competitions
+          </h1>
+          <div className="relative aspect-[4/3] overflow-hidden md:aspect-[21/9]">
+            <Image
+              src="/competitions/title-card.webp"
+              alt="QuantumSlate competitors with their fleet of hand-built RC planes and drones at a national event"
+              fill
+              sizes="(max-width: 1152px) 100vw, 1152px"
+              className="object-cover"
+            />
           </div>
         </div>
 

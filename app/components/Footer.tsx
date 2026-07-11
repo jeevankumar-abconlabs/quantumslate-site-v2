@@ -103,7 +103,17 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col gap-3 border-t border-navy/10 pt-6 text-xs text-foreground/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} QuantumSlate. All rights reserved.</p>
+          <p>
+            © {year} QuantumSlate. All rights reserved. · Powered by{" "}
+            <a
+              href="https://abconlabs.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold transition-colors hover:text-navy"
+            >
+              ABCON Labs
+            </a>
+          </p>
           <div className="flex gap-6">
             <Link href="#" className="transition-colors hover:text-navy">
               Privacy Policy
