@@ -9,6 +9,7 @@ import { workshopProject, workshopSheet, STUDIO_ENABLED } from "../theatre/works
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
 import { compensateDockX, modelScale, PHONE_LOW_CENTER, useDroneInstance } from "./droneInstance";
 import FadingGrid from "./FadingGrid";
+import Preloader from "./Preloader";
 
 // Intro: fly in at centre (0→2.967), then dock to the left (→3.967). After that
 // the [3.967, 7.967] segment (one slow full turn while docked) loops forever.
@@ -54,13 +55,14 @@ export default function WorkshopDrone({
   rememberIntro?: boolean;
 }) {
   const [mounted, setMounted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
-  // One intro run at centre, then the drone docks left and spins forever.
-  // In editor mode, let Studio drive the playhead instead.
+  // One intro run at centre (only after the model has loaded, so it plays in
+  // view), then the drone docks left and spins forever. Studio drives in editor mode.
   const introDone = useIntroThenLoop(
-    mounted && !paused && !STUDIO_ENABLED,
+    loaded && !paused && !STUDIO_ENABLED,
     workshopProject,
     workshopSheet,
     INTRO_END,
@@ -94,6 +96,9 @@ export default function WorkshopDrone({
         </Canvas>
         </div>
       )}
+
+      {/* Cover the scene with a percentage preloader until the model is in. */}
+      {mounted && <Preloader label="Drones" onReady={() => setLoaded(true)} />}
 
       {/* Title + scroll cue fade in on the right once the drone has docked left
           (md+ only — mobile shows the WorkshopTitle section below the scene instead). */}

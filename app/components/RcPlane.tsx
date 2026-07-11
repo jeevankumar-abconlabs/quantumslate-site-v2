@@ -9,6 +9,7 @@ import { rcPlaneProject, rcPlaneSheet, STUDIO_ENABLED } from "../theatre/rcplane
 import { useIntroThenLoop } from "../theatre/useLoopedSequence";
 import { compensateDockX, modelScale, normalize, PHONE_LOW_CENTER } from "./droneInstance";
 import FadingGrid from "./FadingGrid";
+import Preloader from "./Preloader";
 
 const PLANE_MODEL = "/3d-models/rcplane/scene.gltf";
 // Intro: spin at centre (0→3.7), then dock to the left (→4.7). After that the
@@ -67,13 +68,14 @@ export default function RcPlane({
   rememberIntro?: boolean;
 }) {
   const [mounted, setMounted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
-  // One intro run at centre, then the plane docks left and spins forever.
-  // In editor mode, let Studio drive the playhead instead.
+  // One intro run at centre (only after the model has loaded, so it plays in
+  // view), then the plane docks left and spins forever. Studio drives in editor mode.
   const introDone = useIntroThenLoop(
-    mounted && !paused && !STUDIO_ENABLED,
+    loaded && !paused && !STUDIO_ENABLED,
     rcPlaneProject,
     rcPlaneSheet,
     INTRO_END,
@@ -106,6 +108,9 @@ export default function RcPlane({
         </Canvas>
         </div>
       )}
+
+      {/* Cover the scene with a percentage preloader until the model is in. */}
+      {mounted && <Preloader label="RC Planes" onReady={() => setLoaded(true)} />}
 
       {/* Title + scroll cue fade in on the right once the plane has docked left
           (md+ only — mobile shows the WorkshopTitle section below the scene instead). */}
