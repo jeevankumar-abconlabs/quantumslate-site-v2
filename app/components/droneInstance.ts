@@ -77,7 +77,7 @@ export function modelScale(
   worldWidth: number,
 ) {
   const k = desktopness(size);
-  return k > 0 ? 0.9 * k : Math.min(0.9, Math.max(0.5, worldWidth / 6));
+  return k > 0 ? 0.72 * k : Math.min(0.72, Math.max(0.4, worldWidth / 7.5));
 }
 
 // Phone framing: the canvas is 70dvh tall and bottom-anchored inside a 55dvh

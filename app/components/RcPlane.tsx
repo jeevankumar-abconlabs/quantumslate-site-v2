@@ -86,7 +86,7 @@ export default function RcPlane({
   return (
     // Mobile: section shorter than the bottom-anchored canvas, cropping the
     // camera's dead space off the top. Desktop: canvas fills the section.
-    <section className="relative h-[55dvh] w-full overflow-hidden md:h-[100dvh]">
+    <section className="relative h-[55dvh] w-full overflow-hidden md:h-[70dvh]">
       <FadingGrid />
       {mounted && (
         <div className="absolute inset-x-0 bottom-0 h-[70dvh] md:inset-0 md:h-auto">
@@ -98,7 +98,7 @@ export default function RcPlane({
             <Environment files="/hdri/potsdamer_platz_1k.hdr" />
             {/* Static wrapper: compensateDockX cancels the dock-left on narrow screens here. */}
             <group>
-              <e.group theatreKey="Plane" position={[0, 0, 0]} scale={3}>
+              <e.group theatreKey="Plane" position={[0, 0, 0]} scale={2.4}>
                 <Suspense fallback={null}>
                   <Plane />
                 </Suspense>
@@ -112,20 +112,27 @@ export default function RcPlane({
       {/* Cover the scene with a percentage preloader until the model is in. */}
       {mounted && <Preloader label="RC Planes" onReady={() => setLoaded(true)} />}
 
-      {/* Title + scroll cue fade in on the right once the plane has docked left
-          (md+ only — mobile shows the WorkshopTitle section below the scene instead). */}
+      {/* Title + description + Learn More fade in on the right once the plane
+          has docked left (md+ only — mobile shows WorkshopTitle below). */}
       <div
-        className={`pointer-events-none absolute inset-y-0 right-6 hidden flex-col items-center justify-center gap-6 transition-opacity duration-700 md:flex md:right-[20%] ${
+        className={`pointer-events-none absolute inset-y-0 right-6 hidden flex-col items-start justify-center gap-5 transition-opacity duration-700 md:flex md:right-[12%] lg:right-[16%] ${
           introDone ? "opacity-100" : "opacity-0"
         }`}
       >
         <h1 className="text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           RC Planes
         </h1>
-        <span className="flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-navy/30">
-          Scroll
-          <span className="animate-bounce text-base leading-none">↓</span>
-        </span>
+        <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
+          Design and build your own aircraft, then fly it — from maiden flight
+          to aerobatic rolls in the final showdown.
+        </p>
+        <a
+          href="/workshops/rc-planes"
+          className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-navy px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.15em] text-white shadow-lg shadow-navy/30 transition-all duration-300 hover:scale-105 hover:bg-navy/90"
+        >
+          Learn More
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   );
