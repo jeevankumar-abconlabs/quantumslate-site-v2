@@ -137,7 +137,7 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <Link
             href="/contact"
-            className="hidden lg:inline-flex items-center justify-center px-7 h-9 rounded-full font-unbounded font-bold text-[11px] uppercase tracking-widest bg-navy text-background hover:bg-navy/90 hover:scale-105 transition-all duration-300"
+            className="hidden lg:inline-flex items-center justify-center px-7 h-9 rounded-full font-bold text-[11px] uppercase tracking-widest bg-navy text-background hover:bg-navy/90 hover:scale-105 transition-all duration-300"
           >
             Book Now
           </Link>
