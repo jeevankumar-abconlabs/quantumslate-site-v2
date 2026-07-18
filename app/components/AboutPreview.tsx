@@ -51,7 +51,7 @@ export default function AboutPreview() {
             }}
             inset={{
               src: "/about-us/about-us-general-6.webp",
-              alt: "Students building foam aircraft wings at a QuantumSlate workshop",
+              alt: "QuantumSlate instructor walking army personnel through a UAV build around a worktable",
             }}
           />
         </div>

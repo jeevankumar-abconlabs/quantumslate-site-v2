@@ -32,7 +32,7 @@ export default function Services() {
           Industry Services
         </h1>
         <p className="mt-5 max-w-2xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-          From first brief to field deployment — UAV engineering delivered as a
+          From first brief to field deployment: UAV engineering delivered as a
           service, built around your mission.
         </p>
 

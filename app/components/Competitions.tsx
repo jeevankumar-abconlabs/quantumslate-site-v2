@@ -11,7 +11,7 @@ import Image from "next/image";
 const DISCIPLINES = [
   {
     name: "Drone Racing",
-    copy: "Head-to-head FPV and line-of-sight racing — reflexes, tuning, and nerve at full throttle through the gates.",
+    copy: "Head-to-head FPV and line-of-sight racing: reflexes, tuning, and nerve at full throttle through the gates.",
   },
   {
     name: "RC Precision",
@@ -19,7 +19,7 @@ const DISCIPLINES = [
   },
   {
     name: "Model Rocketry",
-    copy: "Altitude and recovery contests — stable builds, clean parachute deployments, and the tightest apogee predictions.",
+    copy: "Altitude and recovery contests: stable builds, clean parachute deployments, and the tightest apogee predictions.",
   },
   {
     name: "Payload Challenge",
@@ -58,7 +58,7 @@ export default function Competitions() {
                 We take our builders beyond the workshop and onto the national
                 stage. Across drone racing, precision RC aerobatics, rocketry,
                 and payload engineering, our teams put months of hands-on work
-                to the test against the best in the country — flying, launching,
+                to the test against the best in the country: flying, launching,
                 and competing under real pressure.
               </p>
               <p className="mt-4 text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">

@@ -111,7 +111,7 @@ export default function WorkshopDrone({
           Drones
         </h1>
         <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
-          Build a drone from raw components to first flight — frame, motors,
+          Build a drone from raw components to first flight: frame, motors,
           wiring, and all. Ends in the head-to-head Drone Olympics™.
         </p>
         <a

@@ -3,19 +3,19 @@
 // Defence — a 3D coverflow gallery (client sketch: rotating photo slides + a
 // short caption below). Built on framer-motion (already installed) so the
 // spring motion is smooth without pulling in a carousel library.
-// Slides are engineering-grid placeholders; drop real photos into
-// /public/defence and swap each placeholder for <Image fill className="object-cover" />.
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const SLIDES = [
-  { alt: "Surveillance UAV", caption: "Long-endurance surveillance UAVs for wide-area reconnaissance." },
-  { alt: "Tactical Drone", caption: "Rugged tactical quadcopters built for rapid field deployment." },
-  { alt: "Payload Systems", caption: "Modular payload bays — optical, thermal, and sensor packages." },
-  { alt: "Ground Control", caption: "Secure ground-control stations with encrypted telemetry links." },
-  { alt: "Swarm Ops", caption: "Coordinated multi-drone swarms for area coverage and resilience." },
-  { alt: "R&D Lab", caption: "In-house R&D turning defence briefs into flight-ready hardware." },
-];
+  { alt: "Classroom Training", caption: "UAV systems training for army personnel, from airframe anatomy to flight electronics." },
+  { alt: "Field Briefing", caption: "Fixed-wing UAV briefing with unit officers ahead of a field flying session." },
+  { alt: "Hands-On Instruction", caption: "Hands-on aircraft handling instruction with troops on the parade ground." },
+  { alt: "Outdoor Build Session", caption: "Airframes, electronics, and tools laid out for an outdoor assembly session." },
+  { alt: "Range Operations", caption: "Tethered drone operations over the range for persistent aerial observation." },
+  { alt: "Tethered Quadcopter", caption: "Tethered quadcopter staged on its pad ahead of a surveillance flight." },
+  { alt: "Field Trials", caption: "Custom-built surveillance quadcopter holding a low hover during field trials." },
+  { alt: "Persistent Surveillance", caption: "A powered tether keeps the aircraft on station for long-endurance monitoring." },
+].map((s, i) => ({ ...s, src: `/defence-page-loop/defence-page-${i + 1}.webp` }));
 
 export default function Defence() {
   const n = SLIDES.length;
@@ -43,8 +43,12 @@ export default function Defence() {
           Defence
         </h1>
         <p className="mt-5 max-w-2xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-          Aerospace engineering in service of the mission — unmanned systems,
-          payloads, and ground stations, designed and built end to end.
+          At QuantumSlate, defence innovation forms the core of our research
+          and development efforts. Modern defence operations increasingly rely
+          on autonomous systems, real-time intelligence, aerial surveillance,
+          and advanced robotics. We are committed to developing
+          technologies that strengthen operational capabilities while reducing
+          human risk in complex environments.
         </p>
 
         {/* ── 3D coverflow ── */}
@@ -84,8 +88,13 @@ export default function Defence() {
                       : { type: "spring", stiffness: 260, damping: 30, mass: 0.9 }
                   }
                 >
-                  {/* Photo placeholder — swap for <Image src={...} alt={slide.alt} fill className="object-cover" /> */}
-                  <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(241,232,218,0.14)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,232,218,0.14)_1px,transparent_1px)] bg-[size:30px_30px]" />
+                  {/* alt="" — the button's aria-label already names the slide */}
+                  <img
+                    src={slide.src}
+                    alt=""
+                    loading={abs > 1 ? "lazy" : "eager"}
+                    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                  />
                 </motion.button>
               );
             })}

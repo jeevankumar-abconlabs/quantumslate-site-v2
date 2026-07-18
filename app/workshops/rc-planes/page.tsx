@@ -6,7 +6,7 @@ import WorkshopDetails from "../../components/WorkshopDetails";
 // md+: the "RC Planes" title renders inside the scene (right side, after the
 // plane docks left). Mobile: WorkshopTitle shows it below the scene instead.
 export const metadata: Metadata = {
-  title: "Aircraft Workshop — Design, Build & Fly Your Own Aircraft | QuantumSlate",
+  title: "Aircraft Workshop: Design, Build & Fly Your Own Aircraft | QuantumSlate",
   description:
     "Build a radio-controlled plane from scratch in QuantumSlate's aircraft workshop: aerodynamics, airframe construction, electronics, and your first take-off. Hands-on aeromodelling for students and enthusiasts in India.",
 };

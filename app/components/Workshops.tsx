@@ -7,20 +7,20 @@ export const WORKSHOPS = [
   {
     title: "Drones",
     href: "/workshops/drones",
-    body: "Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™.",
+    body: "Build a drone from raw components to first flight: frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™.",
     images: [1, 2, 3, 4].map((n) => `/home-workshop-loop/drones/drone-workshop-${n}.webp`),
   },
   {
     title: "Aircraft",
     images: [1, 2, 3, 4, 5].map((n) => `/home-workshop-loop/aircraft/aircraft-workshop-${n}.webp`),
     href: "/workshops/rc-planes",
-    body: "Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the Aircraft Olympics™.",
+    body: "Design and build your own aircraft, then fly it, from maiden flight to aerobatic rolls in the Aircraft Olympics™.",
   },
   {
     title: "Model Rockets",
     href: "/workshops/rockets",
-    images: [1, 2, 3, 4].map((n) => `/home-workshop-loop/rockets/rocket-workshop-${n}.webp`),
-    body: "Engineer a real rocket — fins, motor, parachute recovery — and send it up with a live countdown launch.",
+    images: ["/home-workshop-loop/rockets/rocket-workshop-3.webp"],
+    body: "Engineer a real rocket with fins, motor, and parachute recovery, and send it up with a live countdown launch.",
   },
 ];
 
@@ -35,7 +35,7 @@ export default function Workshops() {
           Three hands-on builds. One journey from blueprint to lift-off.
         </p>
         <p className="mt-4 max-w-2xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-          Hands-on aerospace workshops for students, engineers, and hobbyists —
+          Hands-on aerospace workshops for students, engineers, and hobbyists:
           drone building, aircraft design, and model rocketry. Learn to design,
           build, and fly the real thing. No prior experience needed.
         </p>
@@ -64,8 +64,12 @@ function Card({ title, body, href, images }: { title: string; body: string; href
               key={src}
               src={src}
               alt={`${title} workshop`}
-              className={`absolute inset-0 h-full w-full object-cover opacity-0 ${
-                images.length === 5 ? "workshop-loop-frame-five" : "animate-workshop-loop-fade"
+              className={`absolute inset-0 h-full w-full object-cover ${
+                images.length === 1
+                  ? ""
+                  : images.length === 5
+                    ? "opacity-0 workshop-loop-frame-five"
+                    : "opacity-0 animate-workshop-loop-fade"
               }`}
               style={{ animationDelay: `${i * 3}s` }}
             />

@@ -123,7 +123,7 @@ export default function RcPlane({
           Aircraft
         </h1>
         <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
-          Design and build your own aircraft, then fly it — from maiden flight
+          Design and build your own aircraft, then fly it, from maiden flight
           to aerobatic rolls in the Aircraft Olympics™.
         </p>
         <a

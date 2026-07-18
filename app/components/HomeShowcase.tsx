@@ -83,19 +83,19 @@ export default function HomeShowcase() {
       <LazyStage Scene={WorkshopDrone} />
       <WorkshopTitle
         label="Drones"
-        description="Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™."
+        description="Build a drone from raw components to first flight: frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™."
         href="/workshops/drones"
       />
       <LazyStage Scene={RcPlane} />
       <WorkshopTitle
         label="Aircraft"
-        description="Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the Aircraft Olympics™."
+        description="Design and build your own aircraft, then fly it, from maiden flight to aerobatic rolls in the Aircraft Olympics™."
         href="/workshops/rc-planes"
       />
       <LazyStage Scene={Rocket3D} />
       <WorkshopTitle
         label="Rockets"
-        description="Engineer a real rocket — fins, motor, parachute recovery — and send it up with a live countdown launch."
+        description="Engineer a real rocket with fins, motor, and parachute recovery, and send it up with a live countdown launch."
         href="/workshops/rockets"
       />
     </>

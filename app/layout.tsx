@@ -20,7 +20,7 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "QuantumSlate — Drone, Aircraft & Rocket Workshops",
+  title: "QuantumSlate | Drone, Aircraft & Rocket Workshops",
   description:
     "Pioneering the future of aerospace innovation through hands-on workshops and cutting-edge UAV solutions.",
 };

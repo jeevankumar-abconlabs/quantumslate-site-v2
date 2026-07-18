@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "About QuantumSlate — Indigenous Aerospace, Defence & Drone Technology Company in India",
+  title: "About QuantumSlate: Indigenous Aerospace, Defence & Drone Technology Company in India",
   description:
     "QuantumSlate Private Limited is an indigenous aerospace and deep-technology company building UAVs, tethered surveillance drones, autonomous VTOL aircraft, and hands-on aerospace education programs across India.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "STEM aerospace education",
   ],
   openGraph: {
-    title: "About QuantumSlate — Aerospace, Defence & Autonomous Technologies",
+    title: "About QuantumSlate: Aerospace, Defence & Autonomous Technologies",
     description:
       "Indigenous aerospace and deep-technology company advancing defence capabilities, unmanned systems, and hands-on aerospace education.",
     images: ["/about-us/about-us-general-1.webp"],
@@ -39,7 +39,7 @@ const SECTIONS = [
     image: "/about-us/about-us-general-1.webp",
     alt: "Fleet of hand-built RC aircraft and UAV prototypes lined up on an airfield before flight testing",
     body: [
-      "Founded by Syed Rayan R, QuantumSlate operates at the intersection of engineering, aerospace research, artificial intelligence, robotics, and real-world operational deployment — designing unmanned systems that bridge the gap between research laboratories and practical field applications.",
+      "Founded by Syed Rayan R, QuantumSlate operates at the intersection of engineering, aerospace research, artificial intelligence, robotics, and real-world operational deployment, designing unmanned systems that bridge the gap between research laboratories and practical field applications.",
       "Our expertise spans UAV design and manufacturing, aerial robotics, aerospace systems engineering, drone operations, autonomous technologies, and advanced electronics integration.",
     ],
   },
@@ -67,7 +67,7 @@ const SECTIONS = [
     alt: "Classroom drone workshop with a laser-cut quadcopter and balsa-wood aircraft on the desks",
     body: [
       "Innovation is sustained by nurturing the next generation of engineers. We invest in aerospace innovation labs, drone training programs, engineering bootcamps, UAV certification programs, research-based learning, and industry-oriented STEM education.",
-      "These programs equip students, researchers, and professionals with hands-on experience in UAV design, avionics, embedded systems, flight operations, and aerospace engineering — bridging the gap between academia and industry.",
+      "These programs equip students, researchers, and professionals with hands-on experience in UAV design, avionics, embedded systems, flight operations, and aerospace engineering, bridging the gap between academia and industry.",
     ],
   },
   {
@@ -143,7 +143,7 @@ export default function AboutPage() {
               Innovation. Engineering. Impact.
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#F1E8DA]/70 md:text-base">
-              Every innovation at QuantumSlate is engineered with purpose —
+              Every innovation at QuantumSlate is engineered with purpose:
               strengthening defence capabilities, advancing aerospace
               technology, and empowering the next generation of engineers to
               build solutions that create lasting impact.

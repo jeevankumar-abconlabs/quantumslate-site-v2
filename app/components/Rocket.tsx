@@ -126,8 +126,8 @@ export default function Rocket3D({
           Rockets
         </h1>
         <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
-          Engineer a real rocket — fins, motor, parachute recovery — and send it
-          up with a live countdown launch.
+          Engineer a real rocket with fins, motor, and parachute recovery, and
+          send it up with a live countdown launch.
         </p>
         <a
           href="/workshops/rockets"

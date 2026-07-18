@@ -19,11 +19,11 @@ const WORKSHOPS = {
       },
       {
         heading: "Real UAV Engineering, Not Slides",
-        body: "Along the way you pick up real UAV engineering skills — aerodynamics, embedded electronics, firmware configuration, and safe flight operations — the same fundamentals our team applies on mission-deployed aerial systems. No prior experience needed; the workshop is open to school students, engineering undergraduates, and hobbyists alike.",
+        body: "Along the way you pick up real UAV engineering skills: aerodynamics, embedded electronics, firmware configuration, and safe flight operations, the same fundamentals our team applies on mission-deployed aerial systems. No prior experience needed; the workshop is open to school students, engineering undergraduates, and hobbyists alike.",
       },
       {
         heading: "Built for the Drone Olympics™",
-        body: "Everything builds up to the Drone Olympics™, our flagship head-to-head flying showdown, where your machine goes up against the rest of the field. You leave with the confidence to assemble, tune, and repair a quadcopter on your own — and a clear picture of where drone engineering can take you, from FPV flying to India's growing UAV industry.",
+        body: "Everything builds up to the Drone Olympics™, our flagship head-to-head flying showdown, where your machine goes up against the rest of the field. You leave with the confidence to assemble, tune, and repair a quadcopter on your own, and a clear picture of where drone engineering can take you, from FPV flying to India's growing UAV industry.",
       },
     ] as Section[],
     skills: [
@@ -33,7 +33,7 @@ const WORKSHOPS = {
       "Piloting & flight safety",
     ],
     timeline: [
-      { title: "Fundamentals & Frame Build", body: "How drones generate lift and stay stable — propellers, thrust, and control loops — then assemble your airframe from the frame up." },
+      { title: "Fundamentals & Frame Build", body: "How drones generate lift and stay stable with propellers, thrust, and control loops, then assemble your airframe from the frame up." },
       { title: "Electronics & Wiring", body: "Wire the motors, ESCs, and flight controller, solder the power distribution, and flash and configure the firmware." },
       { title: "Calibration & First Flight", body: "Calibrate sensors, tune the controls, run pre-flight checks, and take your build through hover, climb, and landing." },
       { title: "Drone Olympics™", body: "Put your machine to the test against the rest in our flagship flying showdown.", finale: true },
@@ -44,28 +44,28 @@ const WORKSHOPS = {
     sections: [
       {
         heading: "Design It, Build It, Fly It",
-        body: "Learn aerodynamics the way pilots and aircraft designers do — by building a radio-controlled plane and flying it. In QuantumSlate's aircraft workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
+        body: "Learn aerodynamics the way pilots and aircraft designers do: by building a radio-controlled plane and flying it. In QuantumSlate's aircraft workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
       },
       {
         heading: "Aerospace Engineering You Can Feel",
-        body: "Every session is grounded in real aerospace engineering: lift and drag, control surfaces, centre of gravity, and trim — concepts you feel through the transmitter sticks, not slides. Your own design choices play out in the air: a longer wing glides flatter, a forward battery steadies the nose.",
+        body: "Every session is grounded in real aerospace engineering: lift and drag, control surfaces, centre of gravity, and trim, concepts you feel through the transmitter sticks, not slides. Your own design choices play out in the air: a longer wing glides flatter, a forward battery steadies the nose.",
       },
       {
         heading: "Built for the Aircraft Olympics™",
-        body: "Everything builds up to the Aircraft Olympics™, our flagship head-to-head aerobatics showdown, where the aircraft you built takes on the rest of the field in rolls, loops, and precision passes. You leave knowing how to design, build, trim, and repair a fixed-wing aircraft on your own — and a clear picture of where aviation can take you, from competitive aeromodelling to India's aerospace industry.",
+        body: "Everything builds up to the Aircraft Olympics™, our flagship head-to-head aerobatics showdown, where the aircraft you built takes on the rest of the field in rolls, loops, and precision passes. You leave knowing how to design, build, trim, and repair a fixed-wing aircraft on your own, and a clear picture of where aviation can take you, from competitive aeromodelling to India's aerospace industry.",
       },
     ] as Section[],
     skills: [
       "Aerodynamics & aircraft design",
-      "Airframe construction — fuselage, wings & tail",
+      "Airframe construction: fuselage, wings & tail",
       "Servo, receiver & motor installation",
       "Trimming, take-off & landing",
     ],
     timeline: [
-      { title: "Aerodynamics & Airframe Build", body: "Why planes fly — lift, drag, thrust, and stability — then build the fuselage, wings, and tail from scratch." },
+      { title: "Aerodynamics & Airframe Build", body: "Why planes fly: lift, drag, thrust, and stability. Then build the fuselage, wings, and tail from scratch." },
       { title: "Control Surfaces & Electronics", body: "Fit the servos, receiver, and motor, and link ailerons, elevator, and rudder to your transmitter." },
       { title: "Trim & Maiden Flight", body: "Balance the centre of gravity, set your control throws, and take your aircraft through its first take-off and landing." },
-      { title: "Aircraft Olympics™", body: "Rolls, loops, and precision passes — put your airmanship to the test against the field.", finale: true },
+      { title: "Aircraft Olympics™", body: "Rolls, loops, and precision passes: put your airmanship to the test against the field.", finale: true },
     ] as Step[],
   },
   rockets: {
@@ -73,15 +73,15 @@ const WORKSHOPS = {
     sections: [
       {
         heading: "A Real Launch at the End of Every Build",
-        body: "QuantumSlate's model rocketry workshop puts a real launch at the end of every build. You engineer a rocket from the airframe up — shape the fins for stability, build the body and nose cone, mount the motor, and pack the parachute recovery system — then clear it through pad checks for a live countdown launch.",
+        body: "QuantumSlate's model rocketry workshop puts a real launch at the end of every build. You engineer a rocket from the airframe up: shape the fins for stability, build the body and nose cone, mount the motor, and pack the parachute recovery system. Then clear it through pad checks for a live countdown launch.",
       },
       {
         heading: "The Physics of Spaceflight, Hands-On",
-        body: "The physics behind spaceflight — thrust, stability, apogee, recovery — taught hands-on, the way aerospace engineers actually work. You build it, you launch it, and you recover what you flew. Open to students and enthusiasts of every level; curiosity is the only prerequisite.",
+        body: "The physics behind spaceflight (thrust, stability, apogee, recovery) taught hands-on, the way aerospace engineers actually work. You build it, you launch it, and you recover what you flew. Open to students and enthusiasts of every level; curiosity is the only prerequisite.",
       },
       {
         heading: "Launch Day, Run Like a Range",
-        body: "Launch day runs like a real range operation — flight cards, pad assignments, a safety perimeter, and a countdown for every rocket. Each flight climbs off the rail, deploys its parachute, and comes home, and every builder walks away with their rocket, their flight story, and the itch to build a bigger one.",
+        body: "Launch day runs like a real range operation: flight cards, pad assignments, a safety perimeter, and a countdown for every rocket. Each flight climbs off the rail, deploys its parachute, and comes home, and every builder walks away with their rocket, their flight story, and the itch to build a bigger one.",
       },
     ] as Section[],
     skills: [
@@ -91,7 +91,7 @@ const WORKSHOPS = {
       "Launch operations & range safety",
     ],
     timeline: [
-      { title: "Rocketry Fundamentals & Airframe", body: "What keeps a rocket stable in flight — centre of pressure vs. gravity — then build the body, fins, and nose cone." },
+      { title: "Rocketry Fundamentals & Airframe", body: "What keeps a rocket stable in flight (centre of pressure vs. gravity), then build the body, fins, and nose cone." },
       { title: "Motors & Recovery Systems", body: "Mount the motor, pack the parachute, and rig the recovery so your rocket comes home intact." },
       { title: "Integration & Pad Checks", body: "Assemble, weigh, and safety-check the full stack until it's cleared for flight." },
       { title: "Launch Day", body: "A live countdown, a hard climb off the rail, and a recovery you rigged yourself.", finale: true },
