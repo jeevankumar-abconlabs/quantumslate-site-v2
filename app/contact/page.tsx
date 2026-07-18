@@ -183,7 +183,9 @@ export default function ContactPage() {
                 <p className="text-sm font-semibold text-navy">Follow Us</p>
                 <div className="mt-3 flex items-center gap-4">
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/quantum-slate/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="QuantumSlate on LinkedIn"
                     className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-background transition-colors hover:bg-gold hover:text-navy"
                   >
@@ -192,7 +194,9 @@ export default function ContactPage() {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/quantum_slate/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="QuantumSlate on Instagram"
                     className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-background transition-colors hover:bg-gold hover:text-navy"
                   >

@@ -43,7 +43,9 @@ export default function Footer() {
             </p>
             <div className="mt-5 flex items-center gap-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/quantum-slate/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="QuantumSlate on LinkedIn"
                 className="text-navy/70 transition-colors hover:text-navy"
               >
@@ -52,7 +54,9 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/quantum_slate/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="QuantumSlate on Instagram"
                 className="text-navy/70 transition-colors hover:text-navy"
               >

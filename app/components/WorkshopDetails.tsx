@@ -1,13 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import JourneyTimeline from "./JourneyTimeline";
 import type { Step } from "./JourneyTimeline";
 
 // Workshop details section, below each workshop's 3D hero — About-page-style
 // alternating editorial rows: paragraph left / image right, then mirrored.
-// Photo areas are engineering-grid placeholders — drop real photos into
-// /public and swap each placeholder for <Image fill className="object-cover" />.
+// Photo areas are engineering-grid placeholders unless a section sets `image`
+// — drop real photos into /public and swap the remaining placeholders for
+// <Image fill className="object-cover" />.
 
-type Section = { heading: string; body: string };
+type Section = { heading: string; body: string; image?: string };
 
 const WORKSHOPS = {
   drones: {
@@ -16,14 +18,17 @@ const WORKSHOPS = {
       {
         heading: "From Raw Components to First Flight",
         body: "QuantumSlate's hands-on drone building workshop takes you from a box of raw components to a quadcopter you pilot yourself. Guided by the same engineers who design UAVs and tethered surveillance systems for defence and police units across India, you assemble the airframe, wire the motors and ESCs, configure the flight controller, and take your machine through its very first flight.",
+        image: "/workshop-pages/drone-workshop-page/drone-workshop-page-1.webp",
       },
       {
         heading: "Real UAV Engineering, Not Slides",
         body: "Along the way you pick up real UAV engineering skills: aerodynamics, embedded electronics, firmware configuration, and safe flight operations, the same fundamentals our team applies on mission-deployed aerial systems. No prior experience needed; the workshop is open to school students, engineering undergraduates, and hobbyists alike.",
+        image: "/workshop-pages/drone-workshop-page/drone-workshop-page-2.webp",
       },
       {
         heading: "Built for the Drone Olympics™",
         body: "Everything builds up to the Drone Olympics™, our flagship head-to-head flying showdown, where your machine goes up against the rest of the field. You leave with the confidence to assemble, tune, and repair a quadcopter on your own, and a clear picture of where drone engineering can take you, from FPV flying to India's growing UAV industry.",
+        image: "/workshop-pages/drone-workshop-page/drone-workshop-page-3.webp",
       },
     ] as Section[],
     skills: [
@@ -45,14 +50,17 @@ const WORKSHOPS = {
       {
         heading: "Design It, Build It, Fly It",
         body: "Learn aerodynamics the way pilots and aircraft designers do: by building a radio-controlled plane and flying it. In QuantumSlate's aircraft workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
+        image: "/workshop-pages/aircraft-workshop-page/aircraft-workshop-page-1.webp",
       },
       {
         heading: "Aerospace Engineering You Can Feel",
         body: "Every session is grounded in real aerospace engineering: lift and drag, control surfaces, centre of gravity, and trim, concepts you feel through the transmitter sticks, not slides. Your own design choices play out in the air: a longer wing glides flatter, a forward battery steadies the nose.",
+        image: "/workshop-pages/aircraft-workshop-page/aircraft-workshop-page-2.webp",
       },
       {
         heading: "Built for the Aircraft Olympics™",
         body: "Everything builds up to the Aircraft Olympics™, our flagship head-to-head aerobatics showdown, where the aircraft you built takes on the rest of the field in rolls, loops, and precision passes. You leave knowing how to design, build, trim, and repair a fixed-wing aircraft on your own, and a clear picture of where aviation can take you, from competitive aeromodelling to India's aerospace industry.",
+        image: "/workshop-pages/aircraft-workshop-page/aircraft-workshop-page-3.webp",
       },
     ] as Section[],
     skills: [
@@ -73,15 +81,8 @@ const WORKSHOPS = {
     sections: [
       {
         heading: "A Real Launch at the End of Every Build",
-        body: "QuantumSlate's model rocketry workshop puts a real launch at the end of every build. You engineer a rocket from the airframe up: shape the fins for stability, build the body and nose cone, mount the motor, and pack the parachute recovery system. Then clear it through pad checks for a live countdown launch.",
-      },
-      {
-        heading: "The Physics of Spaceflight, Hands-On",
-        body: "The physics behind spaceflight (thrust, stability, apogee, recovery) taught hands-on, the way aerospace engineers actually work. You build it, you launch it, and you recover what you flew. Open to students and enthusiasts of every level; curiosity is the only prerequisite.",
-      },
-      {
-        heading: "Launch Day, Run Like a Range",
-        body: "Launch day runs like a real range operation: flight cards, pad assignments, a safety perimeter, and a countdown for every rocket. Each flight climbs off the rail, deploys its parachute, and comes home, and every builder walks away with their rocket, their flight story, and the itch to build a bigger one.",
+        body: "QuantumSlate's model rocketry workshop puts a real launch at the end of every build. You engineer a rocket from the airframe up: shape the fins for stability, build the body and nose cone, mount the motor, and pack the parachute recovery system, then clear it through pad checks for a live countdown launch. Launch day runs like a real range operation: flight cards, pad assignments, a safety perimeter, and a countdown for every rocket, backed by the physics of spaceflight (thrust, stability, apogee, recovery) taught hands-on. Every builder walks away with their rocket, their flight story, and the itch to build a bigger one.",
+        image: "/home-workshop-loop/rockets/rocket-workshop-3.webp",
       },
     ] as Section[],
     skills: [
@@ -121,7 +122,17 @@ export default function WorkshopDetails({ workshop }: { workshop: keyof typeof W
                   i % 2 === 0 ? "md:order-2" : ""
                 }`}
               >
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
+                {s.image ? (
+                  <Image
+                    src={s.image}
+                    alt={s.heading}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
+                )}
               </div>
               <div>
                 <h3 className="text-2xl font-bold leading-snug tracking-tight text-navy md:text-3xl">
