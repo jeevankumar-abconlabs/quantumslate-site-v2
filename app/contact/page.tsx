@@ -11,7 +11,7 @@ const EMAIL = "quantumslateofficial@gmail.com";
 
 const INTERESTS = [
   "Drone Workshop",
-  "RC Plane Workshop",
+  "Aircraft Workshop",
   "Rocket Workshop",
   "Competition / Drone Olympics™",
   "Defence Services",

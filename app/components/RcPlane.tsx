@@ -110,7 +110,7 @@ export default function RcPlane({
       )}
 
       {/* Cover the scene with a percentage preloader until the model is in. */}
-      {mounted && <Preloader label="RC Planes" onReady={() => setLoaded(true)} />}
+      {mounted && <Preloader label="Aircraft" onReady={() => setLoaded(true)} />}
 
       {/* Title + description + Learn More fade in on the right once the plane
           has docked left (md+ only — mobile shows WorkshopTitle below). */}
@@ -120,7 +120,7 @@ export default function RcPlane({
         }`}
       >
         <h1 className="text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
-          RC Planes
+          Aircraft
         </h1>
         <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
           Design and build your own aircraft, then fly it — from maiden flight

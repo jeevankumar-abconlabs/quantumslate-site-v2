@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 export default function CtaBand({
-  title = "Ready to build something that flies?",
+  title = "Build something that flies.",
   body = "Bring a hands-on aerospace workshop to your school, college, or team. Tell us what you're after and we'll take it from there.",
   cta = "Enquire Now",
 }: {

@@ -17,6 +17,32 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-unbounded: var(--font-unbounded);
+
+  /* Home workshop card image loop — 4 frames × 3 s, crossfading. Each frame
+     runs this 12 s cycle offset by 3 s (delay set inline per frame). */
+  --animate-workshop-loop-fade: workshop-loop-fade 12s infinite;
+  @keyframes workshop-loop-fade {
+    0% { opacity: 0; }
+    4% { opacity: 1; }
+    25% { opacity: 1; }
+    29% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+}
+
+/* 5-frame variant of the workshop card loop (5 × 3 s = 15 s cycle). Plain CSS
+   rather than a @theme animate-* entry — Tailwind didn't emit the utility for
+   this second animation name. */
+.workshop-loop-frame-five {
+  opacity: 0;
+  animation: workshop-loop-fade-five 15s infinite;
+}
+@keyframes workshop-loop-fade-five {
+  0% { opacity: 0; }
+  3.3% { opacity: 1; }
+  20% { opacity: 1; }
+  23.3% { opacity: 0; }
+  100% { opacity: 0; }
 }
 
 /* Theme locked to ivory across the whole site (no dark-mode flip). */

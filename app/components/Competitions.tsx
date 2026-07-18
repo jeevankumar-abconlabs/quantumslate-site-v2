@@ -39,7 +39,7 @@ export default function Competitions() {
           <div className="relative aspect-[4/3] overflow-hidden md:aspect-[21/9]">
             <Image
               src="/competitions/title-card.webp"
-              alt="QuantumSlate competitors with their fleet of hand-built RC planes and drones at a national event"
+              alt="QuantumSlate competitors with their fleet of hand-built aircraft and drones at a national event"
               fill
               sizes="(max-width: 1152px) 100vw, 1152px"
               className="object-cover"

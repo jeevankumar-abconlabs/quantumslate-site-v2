@@ -26,7 +26,7 @@ export default function Navbar() {
       name: "Workshops",
       children: [
         { name: "Drones",    href: "/workshops/drones"    },
-        { name: "RC Planes", href: "/workshops/rc-planes" },
+        { name: "Aircraft", href: "/workshops/rc-planes" },
         { name: "Rockets",   href: "/workshops/rockets"   },
       ],
     },

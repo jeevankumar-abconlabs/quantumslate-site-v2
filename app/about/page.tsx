@@ -64,7 +64,7 @@ const SECTIONS = [
   {
     heading: "Education & Workforce Development",
     image: "/about-us/about-us-general-5.webp",
-    alt: "Classroom drone workshop with a laser-cut quadcopter and balsa-wood RC plane on the desks",
+    alt: "Classroom drone workshop with a laser-cut quadcopter and balsa-wood aircraft on the desks",
     body: [
       "Innovation is sustained by nurturing the next generation of engineers. We invest in aerospace innovation labs, drone training programs, engineering bootcamps, UAV certification programs, research-based learning, and industry-oriented STEM education.",
       "These programs equip students, researchers, and professionals with hands-on experience in UAV design, avionics, embedded systems, flight operations, and aerospace engineering — bridging the gap between academia and industry.",

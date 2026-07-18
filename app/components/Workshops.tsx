@@ -8,15 +8,18 @@ export const WORKSHOPS = [
     title: "Drones",
     href: "/workshops/drones",
     body: "Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™.",
+    images: [1, 2, 3, 4].map((n) => `/home-workshop-loop/drones/drone-workshop-${n}.webp`),
   },
   {
-    title: "RC Planes",
+    title: "Aircraft",
+    images: [1, 2, 3, 4, 5].map((n) => `/home-workshop-loop/aircraft/aircraft-workshop-${n}.webp`),
     href: "/workshops/rc-planes",
     body: "Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the Aircraft Olympics™.",
   },
   {
     title: "Model Rockets",
     href: "/workshops/rockets",
+    images: [1, 2, 3, 4].map((n) => `/home-workshop-loop/rockets/rocket-workshop-${n}.webp`),
     body: "Engineer a real rocket — fins, motor, parachute recovery — and send it up with a live countdown launch.",
   },
 ];
@@ -33,13 +36,13 @@ export default function Workshops() {
         </p>
         <p className="mt-4 max-w-2xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
           Hands-on aerospace workshops for students, engineers, and hobbyists —
-          drone building, RC plane design, and model rocketry. Learn to design,
+          drone building, aircraft design, and model rocketry. Learn to design,
           build, and fly the real thing. No prior experience needed.
         </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {WORKSHOPS.map((w) => (
-            <Card key={w.title} title={w.title} href={w.href} body={w.body} />
+            <Card key={w.title} {...w} />
           ))}
         </div>
       </div>
@@ -47,18 +50,34 @@ export default function Workshops() {
   );
 }
 
-function Card({ title, body, href }: { title: string; body: string; href: string }) {
+function Card({ title, body, href, images }: { title: string; body: string; href: string; images?: string[] }) {
   return (
     <Link
       href={href}
       className="group flex flex-col overflow-hidden border border-navy/10 bg-navy/[0.03] transition-colors hover:border-gold/40"
     >
-      {/* Image placeholder with faint engineering grid */}
+      {/* Image loop (3 s per frame, CSS crossfade) or placeholder grid */}
       <div className="relative aspect-[4/3] bg-navy/[0.05]">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(12,31,60,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(12,31,60,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
-        <span className="absolute bottom-4 left-5 text-xs font-medium uppercase tracking-widest text-navy/40">
-          {title}
-        </span>
+        {images ? (
+          images.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${title} workshop`}
+              className={`absolute inset-0 h-full w-full object-cover opacity-0 ${
+                images.length === 5 ? "workshop-loop-frame-five" : "animate-workshop-loop-fade"
+              }`}
+              style={{ animationDelay: `${i * 3}s` }}
+            />
+          ))
+        ) : (
+          <>
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(12,31,60,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(12,31,60,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
+            <span className="absolute bottom-4 left-5 text-xs font-medium uppercase tracking-widest text-navy/40">
+              {title}
+            </span>
+          </>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">

@@ -40,11 +40,11 @@ const WORKSHOPS = {
     ] as Step[],
   },
   "rc-planes": {
-    title: "RC Planes",
+    title: "Aircraft",
     sections: [
       {
         heading: "Design It, Build It, Fly It",
-        body: "Learn aerodynamics the way pilots and aircraft designers do — by building a radio-controlled plane and flying it. In QuantumSlate's RC plane workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
+        body: "Learn aerodynamics the way pilots and aircraft designers do — by building a radio-controlled plane and flying it. In QuantumSlate's aircraft workshop you design and build the fuselage, wings, and tail from scratch, fit the servos, receiver, and motor, then balance and trim your aircraft for its maiden flight.",
       },
       {
         heading: "Aerospace Engineering You Can Feel",

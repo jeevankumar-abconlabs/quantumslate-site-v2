@@ -88,7 +88,7 @@ export default function HomeShowcase() {
       />
       <LazyStage Scene={RcPlane} />
       <WorkshopTitle
-        label="RC Planes"
+        label="Aircraft"
         description="Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the Aircraft Olympics™."
         href="/workshops/rc-planes"
       />
