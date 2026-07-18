@@ -32,7 +32,6 @@ export default function Navbar() {
     },
     { name: "Competitions", href: "/competitions" },
     { name: "Defence", href: "/defence" },
-    { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
   ];
 

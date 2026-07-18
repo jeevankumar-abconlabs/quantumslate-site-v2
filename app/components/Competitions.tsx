@@ -1,29 +1,25 @@
 // National Level Competitions:
 //  1. A title band with the group photo living behind the heading (kept as-is).
-//  2. An editorial discipline index — hairline-divided rows, each with an
-//     oversized number, the discipline, a one-liner, and a wide photo strip.
-// Solid brand colours only, no gradients. Photo areas are placeholders with the
-// site's engineering-grid motif — drop real photos into /public/competitions
-// and swap each placeholder <div> for <Image ... fill className="object-cover" />.
+//  2. A "versus" face-off band — every workshop track converges on one of two
+//     flagship showdowns. Two solid-navy panels split by a gold "OR" badge
+//     that overlaps both on desktop and stacks between them on mobile.
+// Solid brand colours only, no gradients.
 
 import Image from "next/image";
+import Link from "next/link";
 
-const DISCIPLINES = [
+const OLYMPICS = [
   {
-    name: "Drone Racing",
-    copy: "Head-to-head FPV and line-of-sight racing: reflexes, tuning, and nerve at full throttle through the gates.",
+    name: "Drone Olympics",
+    href: "/workshops/drones",
+    tagline: "Head-to-head flying showdown",
+    copy: "Every quadcopter built in the drone workshop meets the field in one final gate run.",
   },
   {
-    name: "RC Precision",
-    copy: "Judged aerobatic routines and spot-landing challenges, where smooth, exact flying beats raw speed.",
-  },
-  {
-    name: "Model Rocketry",
-    copy: "Altitude and recovery contests: stable builds, clean parachute deployments, and the tightest apogee predictions.",
-  },
-  {
-    name: "Payload Challenge",
-    copy: "Engineering missions: lift, carry, and deliver a payload within strict weight, size, and time budgets.",
+    name: "Aircraft Olympics",
+    href: "/workshops/rc-planes",
+    tagline: "Aerobatics showdown",
+    copy: "Every fixed-wing aircraft built in the aircraft workshop earns its wings in the sky.",
   },
 ];
 
@@ -47,64 +43,60 @@ export default function Competitions() {
           </div>
         </div>
 
-        {/* ── Discipline index: intro, then hairline-divided numbered rows ── */}
+        {/* ── Face-off: every build leads to one of two flagship showdowns ── */}
         <div className="mt-16 md:mt-24">
-          <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-16">
-            <h2 className="text-[clamp(1.75rem,4vw,2.75rem)] font-black uppercase leading-[1] tracking-tight text-navy">
-              Where We Compete
-            </h2>
-            <div>
-              <p className="text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-                We take our builders beyond the workshop and onto the national
-                stage. Across drone racing, precision RC aerobatics, rocketry,
-                and payload engineering, our teams put months of hands-on work
-                to the test against the best in the country: flying, launching,
-                and competing under real pressure.
-              </p>
-              <p className="mt-4 text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-                Each discipline demands its own craft, but the journey is the
-                same: design it, build it, trust it, and fly it when the
-                countdown hits zero.
-              </p>
-            </div>
-          </div>
+          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-navy/50">
+            Every Build Leads Here
+          </p>
+          <h2 className="mt-3 text-center text-[clamp(1.75rem,4vw,2.75rem)] font-black uppercase leading-[1] tracking-tight text-navy">
+            The Showdown Awaits
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
+            Every student who completes a QuantumSlate workshop gets to
+            compete in its finale. Build a drone, and you fly it in the
+            Drone Olympics™. Build an aircraft, and you fly it in the
+            Aircraft Olympics™.
+          </p>
 
-          <div className="mt-14 divide-y divide-navy/10 border-y border-navy/10">
-            {DISCIPLINES.map((d, i) => (
-              <article
-                key={d.name}
-                className="grid items-center gap-6 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-14 md:py-12"
+          <div className="relative mt-10 grid gap-3 md:grid-cols-2 md:gap-3">
+            {OLYMPICS.map((o) => (
+              <Link
+                key={o.name}
+                href={o.href}
+                className="group relative flex flex-col justify-between overflow-hidden bg-navy px-8 py-14 text-center transition-colors hover:bg-navy/90 md:px-10 md:py-20"
               >
-                <div className="flex items-start gap-5 md:gap-7">
-                  <span className="text-[clamp(2.5rem,5vw,4rem)] font-black leading-none tracking-tight text-navy/15 tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="pt-1">
-                    <h3 className="text-xl font-black uppercase tracking-tight text-navy md:text-2xl">
-                      {d.name}
-                    </h3>
-                    <p className="mt-3 max-w-md text-[clamp(0.9rem,1.3vw,1.05rem)] leading-relaxed text-foreground/70">
-                      {d.copy}
-                    </p>
-                  </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
+                    {o.tagline}
+                  </p>
+                  <h3 className="mt-4 text-[clamp(2rem,5vw,3.25rem)] font-black uppercase leading-[0.95] tracking-tight text-background">
+                    {o.name}
+                    <sup className="ml-1 text-[0.35em] font-bold align-super">™</sup>
+                  </h3>
+                  <p className="mx-auto mt-5 max-w-xs text-sm leading-relaxed text-background/70">
+                    {o.copy}
+                  </p>
                 </div>
-                <PhotoTile span="aspect-[16/9] md:aspect-[16/6]" />
-              </article>
+                <span className="mx-auto mt-8 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gold transition-colors group-hover:text-background">
+                  See the Workshop
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </span>
+              </Link>
             ))}
+
+            {/* Gold "AND" badge — centred over the seam on desktop, an inline
+                divider between the stacked panels on mobile. */}
+            <div className="pointer-events-none relative -my-6 flex justify-center md:absolute md:inset-y-0 md:left-1/2 md:my-0 md:-translate-x-1/2 md:items-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-background bg-gold text-sm font-black uppercase tracking-widest text-navy">
+                And
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function PhotoTile({ span }: { span: string }) {
-  return (
-    <div
-      className={`relative overflow-hidden border border-navy/10 bg-navy/[0.05] ${span}`}
-    >
-      {/* Engineering-grid placeholder — swap for a real <Image fill> per discipline. */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
-    </div>
   );
 }

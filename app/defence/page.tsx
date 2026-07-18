@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Defence from "../components/Defence";
 
@@ -5,7 +6,7 @@ const MISSIONS = [
   {
     title: "Adyar Police Drone Unit",
     subtitle: "Drone-Based Public Safety & Surveillance Initiative",
-    label: "Public Safety Ops",
+    image: "/defence-additional/adayar-drone-unit.webp",
     body: [
       "QuantumSlate collaborated with the Adyar Police Unit to support the integration of drone technology into modern policing operations. The initiative focused on demonstrating the application of unmanned aerial systems for public safety, crowd monitoring, emergency response, traffic management, disaster assessment, and surveillance.",
       "The project showcased how aerial intelligence can provide law enforcement agencies with enhanced situational awareness, rapid area assessment, and real-time decision support, enabling more effective and technology-driven policing.",
@@ -15,7 +16,7 @@ const MISSIONS = [
     // ponytail: client asked not to name the regiment or location here.
     title: "Indian Army Field Regiment",
     subtitle: "Development of a 24/7 Tethered Aerial Surveillance System",
-    label: "Tethered Surveillance",
+    image: "/defence-additional/army-regiment.webp",
     body: [
       "QuantumSlate undertook the design and development of a 24/7 Tethered Drone Surveillance System to address the need for continuous aerial monitoring in strategic environments.",
       "Unlike conventional drones with limited flight endurance, the tethered platform is designed for uninterrupted operation through a continuous power supply, enabling persistent surveillance, perimeter security, reconnaissance, and real-time monitoring. The system is intended to enhance operational awareness while reducing deployment time and increasing mission efficiency.",
@@ -24,7 +25,7 @@ const MISSIONS = [
   {
     title: "Territorial Army Base, Jammu & Kashmir",
     subtitle: "Autonomous Fixed-Wing VTOL Aircraft Development",
-    label: "VTOL Aircraft",
+    image: "/defence-additional/fixed-wing-vtol.webp",
     body: [
       "QuantumSlate developed an Autonomous Fixed-Wing VTOL (Vertical Take-Off and Landing) Aircraft designed for operations in challenging terrains where conventional runways are unavailable.",
       "The platform combines the vertical take-off capability of multirotor systems with the long-range efficiency of fixed-wing aircraft, enabling autonomous flight for reconnaissance, aerial mapping, surveillance, logistics support, and mission planning. Designed with intelligent flight control, autonomous navigation, and mission adaptability, the aircraft supports operations in mountainous, remote, and strategically demanding environments.",
@@ -74,12 +75,14 @@ export default function DefencePage() {
                       </p>
                     ))}
                   </div>
-                  {/* Photo placeholder — swap for <Image fill className="object-cover" /> */}
-                  <div className="relative aspect-[3/2] w-full overflow-hidden border border-navy/10 bg-navy/[0.05] md:order-2">
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(20,39,78,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,39,78,0.10)_1px,transparent_1px)] bg-[size:28px_28px]" />
-                    <span className="absolute bottom-4 left-5 text-xs font-medium uppercase tracking-widest text-navy/40">
-                      {m.label}
-                    </span>
+                  <div className="relative aspect-[3/2] w-full overflow-hidden border border-navy/10 md:order-2">
+                    <Image
+                      src={m.image}
+                      alt={m.subtitle}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
                   </div>
                 </article>
               ))}
