@@ -13,7 +13,7 @@ const INTERESTS = [
   "Drone Workshop",
   "RC Plane Workshop",
   "Rocket Workshop",
-  "Competition / Drone Olympics",
+  "Competition / Drone Olympics™",
   "Defence Services",
   "Other",
 ];

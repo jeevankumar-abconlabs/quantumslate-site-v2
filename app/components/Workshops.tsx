@@ -7,12 +7,12 @@ export const WORKSHOPS = [
   {
     title: "Drones",
     href: "/workshops/drones",
-    body: "Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics.",
+    body: "Build a drone from raw components to first flight — frame, motors, wiring, and all. Ends in the head-to-head Drone Olympics™.",
   },
   {
     title: "RC Planes",
     href: "/workshops/rc-planes",
-    body: "Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the final showdown.",
+    body: "Design and build your own aircraft, then fly it — from maiden flight to aerobatic rolls in the Aircraft Olympics™.",
   },
   {
     title: "Model Rockets",

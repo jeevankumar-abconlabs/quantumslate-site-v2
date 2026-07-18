@@ -22,8 +22,8 @@ const WORKSHOPS = {
         body: "Along the way you pick up real UAV engineering skills — aerodynamics, embedded electronics, firmware configuration, and safe flight operations — the same fundamentals our team applies on mission-deployed aerial systems. No prior experience needed; the workshop is open to school students, engineering undergraduates, and hobbyists alike.",
       },
       {
-        heading: "Built for the Drone Olympics",
-        body: "Everything builds up to the Drone Olympics, our flagship head-to-head flying showdown, where your machine goes up against the rest of the field. You leave with the confidence to assemble, tune, and repair a quadcopter on your own — and a clear picture of where drone engineering can take you, from FPV flying to India's growing UAV industry.",
+        heading: "Built for the Drone Olympics™",
+        body: "Everything builds up to the Drone Olympics™, our flagship head-to-head flying showdown, where your machine goes up against the rest of the field. You leave with the confidence to assemble, tune, and repair a quadcopter on your own — and a clear picture of where drone engineering can take you, from FPV flying to India's growing UAV industry.",
       },
     ] as Section[],
     skills: [
@@ -36,7 +36,7 @@ const WORKSHOPS = {
       { title: "Fundamentals & Frame Build", body: "How drones generate lift and stay stable — propellers, thrust, and control loops — then assemble your airframe from the frame up." },
       { title: "Electronics & Wiring", body: "Wire the motors, ESCs, and flight controller, solder the power distribution, and flash and configure the firmware." },
       { title: "Calibration & First Flight", body: "Calibrate sensors, tune the controls, run pre-flight checks, and take your build through hover, climb, and landing." },
-      { title: "Drone Olympics", body: "Put your machine to the test against the rest in our flagship flying showdown.", finale: true },
+      { title: "Drone Olympics™", body: "Put your machine to the test against the rest in our flagship flying showdown.", finale: true },
     ] as Step[],
   },
   "rc-planes": {
@@ -51,8 +51,8 @@ const WORKSHOPS = {
         body: "Every session is grounded in real aerospace engineering: lift and drag, control surfaces, centre of gravity, and trim — concepts you feel through the transmitter sticks, not slides. Your own design choices play out in the air: a longer wing glides flatter, a forward battery steadies the nose.",
       },
       {
-        heading: "Crash, Repair, Fly Again",
-        body: "Crashes are part of the syllabus — you repair, re-trim, and fly again, exactly the loop real flight-test engineers work in. By the finale you're flying rolls, loops, and precision passes in the aerobatics showdown, with an aircraft you built yourself.",
+        heading: "Built for the Aircraft Olympics™",
+        body: "Everything builds up to the Aircraft Olympics™, our flagship head-to-head aerobatics showdown, where the aircraft you built takes on the rest of the field in rolls, loops, and precision passes. You leave knowing how to design, build, trim, and repair a fixed-wing aircraft on your own — and a clear picture of where aviation can take you, from competitive aeromodelling to India's aerospace industry.",
       },
     ] as Section[],
     skills: [
@@ -65,7 +65,7 @@ const WORKSHOPS = {
       { title: "Aerodynamics & Airframe Build", body: "Why planes fly — lift, drag, thrust, and stability — then build the fuselage, wings, and tail from scratch." },
       { title: "Control Surfaces & Electronics", body: "Fit the servos, receiver, and motor, and link ailerons, elevator, and rudder to your transmitter." },
       { title: "Trim & Maiden Flight", body: "Balance the centre of gravity, set your control throws, and take your aircraft through its first take-off and landing." },
-      { title: "Aerobatics Showdown", body: "Rolls, loops, and precision passes — put your airmanship to the test against the field.", finale: true },
+      { title: "Aircraft Olympics™", body: "Rolls, loops, and precision passes — put your airmanship to the test against the field.", finale: true },
     ] as Step[],
   },
   rockets: {

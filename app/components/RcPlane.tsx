@@ -124,7 +124,7 @@ export default function RcPlane({
         </h1>
         <p className="max-w-xs text-[clamp(0.85rem,1.2vw,1rem)] leading-relaxed text-foreground/70">
           Design and build your own aircraft, then fly it — from maiden flight
-          to aerobatic rolls in the final showdown.
+          to aerobatic rolls in the Aircraft Olympics™.
         </p>
         <a
           href="/workshops/rc-planes"
