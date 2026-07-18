@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "About QuantumSlate: Aerospace, Defence & Autonomous Technologies",
     description:
       "Indigenous aerospace and deep-technology company advancing defence capabilities, unmanned systems, and hands-on aerospace education.",
-    images: ["/about-us/about-us-general-1.webp"],
+    images: ["/about-us-page/about-us-page-1.webp"],
   },
 };
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const SECTIONS = [
   {
     heading: "Building the Future of Defence, Aerospace & Autonomous Technologies",
-    image: "/about-us/about-us-general-4.webp",
+    image: "/about-us-page/about-us-page-1.webp",
     alt: "QuantumSlate founder addressing a group of engineering students at an outdoor aerospace session",
     body: [
       "QuantumSlate Private Limited is an indigenous aerospace and deep-technology company dedicated to advancing defence capabilities, unmanned systems, and aerospace innovation through engineering excellence and next-generation technology.",
@@ -36,7 +36,7 @@ const SECTIONS = [
   },
   {
     heading: "Aerospace & Deep Technology",
-    image: "/about-us/about-us-general-1.webp",
+    image: "/about-us-page/about-us-page-2.webp",
     alt: "Fleet of hand-built RC aircraft and UAV prototypes lined up on an airfield before flight testing",
     body: [
       "Founded by Syed Rayan R, QuantumSlate operates at the intersection of engineering, aerospace research, artificial intelligence, robotics, and real-world operational deployment, designing unmanned systems that bridge the gap between research laboratories and practical field applications.",
@@ -45,7 +45,7 @@ const SECTIONS = [
   },
   {
     heading: "Defence & Strategic Technology",
-    image: "/about-us/about-us-general-2.webp",
+    image: "/about-us-page/about-us-page-3.webp",
     alt: "QuantumSlate engineers performing final checks on a fixed-wing UAV before a field demonstration",
     body: [
       "Defence innovation forms the core of our research and development. We design unmanned aerial systems for surveillance and reconnaissance, tethered drone systems for continuous 24/7 aerial monitoring, autonomous aerial robotics, mission-specific UAV platforms, and AI-assisted aerial intelligence systems.",
