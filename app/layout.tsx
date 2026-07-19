@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Unbounded } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -18,6 +18,10 @@ const unbounded = Unbounded({
   variable: "--font-unbounded",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  colorScheme: "only light",
+};
 
 export const metadata: Metadata = {
   title: "QuantumSlate | Drone, Aircraft & Rocket Workshops",

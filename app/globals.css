@@ -3,6 +3,9 @@
 /* Royal palette: solid premium colours only, no gradients.
    Ivory background, royal navy accent, near-black text. */
 :root {
+  /* Opt out of browser auto-dark (Chrome/Samsung "force dark" inverts pages
+     that don't declare this) — site is light-only by design. */
+  color-scheme: only light;
   --background: #f4f1e8; /* ivory */
   --foreground: #111111; /* black text */
   --navy: #002166;       /* logo blue — exact match */
