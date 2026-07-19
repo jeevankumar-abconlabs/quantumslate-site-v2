@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Defence from "../components/Defence";
+
+export const metadata: Metadata = {
+  title: "Defence & Public Safety UAV Solutions — Surveillance Drones for Forces",
+  description:
+    "QuantumSlate builds UAV systems for Indian defence and police forces: drone-based policing with the Adyar Police Unit and a 24/7 tethered aerial surveillance system for an Indian Army field regiment.",
+  alternates: { canonical: "/defence" },
+};
 
 const MISSIONS = [
   {

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Aircraft Workshop: Design, Build & Fly Your Own Aircraft | QuantumSlate",
   description:
     "Build a radio-controlled plane from scratch in QuantumSlate's aircraft workshop: aerodynamics, airframe construction, electronics, and your first take-off. Hands-on aeromodelling for students and enthusiasts in India.",
+  alternates: { canonical: "/workshops/rc-planes" },
 };
 
 export default function RcPlanesPage() {

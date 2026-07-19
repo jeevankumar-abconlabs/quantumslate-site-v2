@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Model Rocketry Workshop: Build & Launch a Real Rocket | QuantumSlate",
   description:
     "Engineer and launch your own model rocket with QuantumSlate: fin design, motor mounting, parachute recovery, and a live countdown launch. Hands-on rocketry workshop for students and enthusiasts in India.",
+  alternates: { canonical: "/workshops/rockets" },
 };
 
 export default function RocketsPage() {

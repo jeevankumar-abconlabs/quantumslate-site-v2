@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "Indigenous aerospace and deep-technology company advancing defence capabilities, unmanned systems, and hands-on aerospace education.",
     images: ["/about-us-page/about-us-page-1.webp"],
   },
+  alternates: { canonical: "/about" },
 };
 
 // Alternating editorial sections: image left / content right, then flipped.

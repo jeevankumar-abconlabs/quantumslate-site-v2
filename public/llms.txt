@@ -1,0 +1,28 @@
+# QuantumSlate
+
+> QuantumSlate Private Limited is an indigenous Indian aerospace and deep-technology company. It builds UAVs, tethered surveillance drones, and autonomous VTOL aircraft for defence and public-safety use, and runs hands-on aerospace education workshops (drones, aircraft, rockets) for students across India.
+
+Website: https://quantumslate.in
+Contact: quantumslateofficial@gmail.com
+LinkedIn: https://www.linkedin.com/company/quantum-slate/
+Instagram: https://www.instagram.com/quantum_slate/
+
+## What QuantumSlate does
+
+- **Workshops** — hands-on build-and-fly programs where every student builds a real machine:
+  - Drone workshop: assemble a quadcopter airframe, wire motors and flight controller, then fly it (https://quantumslate.in/workshops/drones)
+  - Aircraft workshop: design and build a radio-controlled fixed-wing plane and take off (https://quantumslate.in/workshops/rc-planes)
+  - Rocket workshop: engineer a model rocket — fins, motor, parachute recovery — and launch it live (https://quantumslate.in/workshops/rockets)
+- **Competitions** — national-level finales for workshop graduates: the Drone Olympics™ (gate-run flying showdown) and the Aircraft Olympics™ (aerobatics showdown) (https://quantumslate.in/competitions)
+- **Defence & public safety** — real deployments, including a drone-based policing initiative with the Adyar Police Unit (Chennai) and a 24/7 tethered aerial surveillance system developed for an Indian Army field regiment (https://quantumslate.in/defence)
+
+## Pages
+
+- [Home](https://quantumslate.in/): Overview of workshops, competitions, and defence work
+- [About](https://quantumslate.in/about): Company background — indigenous aerospace, defence and drone technology
+- [Drone Workshop](https://quantumslate.in/workshops/drones): Build and fly your own drone
+- [Aircraft Workshop](https://quantumslate.in/workshops/rc-planes): Build and fly a fixed-wing RC aircraft
+- [Rocket Workshop](https://quantumslate.in/workshops/rockets): Build and launch a model rocket
+- [Competitions](https://quantumslate.in/competitions): Drone Olympics™ and Aircraft Olympics™
+- [Defence](https://quantumslate.in/defence): UAV systems for defence and public safety
+- [Contact](https://quantumslate.in/contact): Bookings and enquiries

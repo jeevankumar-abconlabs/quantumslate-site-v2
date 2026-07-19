@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Drone Building Workshop: Build & Fly Your Own Drone | QuantumSlate",
   description:
     "Hands-on drone building workshop by QuantumSlate: assemble the airframe, wire motors and flight controller, and fly the drone you built. UAV training for students and hobbyists in India. No experience needed.",
+  alternates: { canonical: "/workshops/drones" },
 };
 
 export default function DronesPage() {
