@@ -58,12 +58,14 @@ export default function Competitions() {
             Aircraft Olympics™.
           </p>
 
-          <div className="relative mt-10 grid gap-3 md:grid-cols-2 md:gap-3">
-            {OLYMPICS.map((o) => (
+          <div className="relative mt-10 flex flex-col gap-3 md:grid md:grid-cols-2 md:gap-3">
+            {OLYMPICS.map((o, i) => (
               <Link
                 key={o.name}
                 href={o.href}
-                className="group relative flex flex-col justify-between overflow-hidden bg-navy px-8 py-14 text-center transition-colors hover:bg-navy/90 md:px-10 md:py-20"
+                className={`group relative flex flex-col justify-between overflow-hidden bg-navy px-8 py-14 text-center transition-colors hover:bg-navy/90 md:px-10 md:py-20 ${
+                  i === 0 ? "order-1" : "order-3"
+                } md:order-none`}
               >
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
@@ -89,7 +91,7 @@ export default function Competitions() {
 
             {/* Gold "AND" badge — centred over the seam on desktop, an inline
                 divider between the stacked panels on mobile. */}
-            <div className="pointer-events-none relative -my-6 flex justify-center md:absolute md:inset-y-0 md:left-1/2 md:my-0 md:-translate-x-1/2 md:items-center">
+            <div className="order-2 pointer-events-none relative z-10 -my-[22px] flex justify-center md:absolute md:inset-y-0 md:left-1/2 md:order-none md:my-0 md:-translate-x-1/2 md:items-center">
               <span className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-background bg-gold text-sm font-black uppercase tracking-widest text-navy">
                 And
               </span>
