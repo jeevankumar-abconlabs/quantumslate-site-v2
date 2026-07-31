@@ -1,13 +1,14 @@
 "use client";
 
-// Contact page: a message form (left) that hands off to the visitor's mail
-// client via a prefilled mailto, and direct contact details (right).
-// ponytail: mailto handoff — no backend. Add a form action when one exists.
+// Contact page: a message form (left) that posts to a Google Apps Script
+// Web App (appends a row to a sheet + emails the client), and direct
+// contact details (right).
 
 import { useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const EMAIL = "quantumslateofficial@gmail.com";
+const FORM_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
 
 const INTERESTS = [
   "Drone Workshop",
@@ -24,15 +25,43 @@ export default function ContactPage() {
   const [org, setOrg] = useState("");
   const [interest, setInterest] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot — real visitors never see or fill this
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`${interest} enquiry from ${name || "the website"}`);
-    const body = encodeURIComponent(
-      `${message}\n\nInterested in: ${interest}` +
-        `\n\n— ${name}${org ? `, ${org}` : ""}${from ? ` (${from})` : ""}`,
-    );
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    if (!FORM_ENDPOINT) return;
+    if (website) {
+      // bot filled the honeypot — pretend to succeed, don't submit
+      setStatus("sent");
+      return;
+    }
+    setStatus("sending");
+    try {
+      // text/plain avoids a CORS preflight the Apps Script Web App doesn't handle;
+      // it still reads the raw body as JSON on the other side.
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ name, email: from, org, interest, message, website }),
+      });
+      const result = await res.json();
+      if (!result.ok) {
+        setErrorMessage(result.message || "Something went wrong.");
+        setStatus("error");
+        return;
+      }
+      setStatus("sent");
+      setName("");
+      setFrom("");
+      setOrg("");
+      setInterest("");
+      setMessage("");
+    } catch {
+      setErrorMessage("");
+      setStatus("error");
+    }
   };
 
   const field =
@@ -55,6 +84,17 @@ export default function ContactPage() {
             onSubmit={onSubmit}
             className="flex flex-col gap-4 border border-navy/10 bg-navy/[0.03] p-8 md:p-10"
           >
+            {/* Honeypot — hidden from sighted users and screen readers; real bots still fill it */}
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] h-0 w-0 opacity-0"
+            />
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-semibold text-navy">
                 Name <span className="text-gold">*</span>
@@ -131,11 +171,26 @@ export default function ContactPage() {
             </div>
             <button
               type="submit"
-              className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-gold hover:text-navy"
+              disabled={status === "sending"}
+              className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-gold hover:text-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send Message"}
               <span aria-hidden="true">→</span>
             </button>
+            {status === "sent" && (
+              <p className="text-sm font-semibold text-navy">
+                Thanks — your message has been sent. We&apos;ll get back to you soon.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="text-sm font-semibold text-red-700">
+                {errorMessage || "Something went wrong."} Please email us directly at{" "}
+                <a href={`mailto:${EMAIL}`} className="underline">
+                  {EMAIL}
+                </a>
+                .
+              </p>
+            )}
           </form>
 
           {/* Right — reach us directly (sizes to its content, doesn't stretch) */}
