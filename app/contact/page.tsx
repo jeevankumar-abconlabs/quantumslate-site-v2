@@ -5,10 +5,21 @@
 // contact details (right).
 
 import { useState } from "react";
+import Script from "next/script";
 import { Mail, Phone, MapPin } from "lucide-react";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      getResponse: (widgetId?: string) => string;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
 
 const EMAIL = "quantumslateofficial@gmail.com";
 const FORM_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const INTERESTS = [
   "Drone Workshop",
@@ -37,6 +48,12 @@ export default function ContactPage() {
       setStatus("sent");
       return;
     }
+    const turnstileToken = window.turnstile?.getResponse() || "";
+    if (!turnstileToken) {
+      setErrorMessage("Please complete the verification check.");
+      setStatus("error");
+      return;
+    }
     setStatus("sending");
     try {
       // text/plain avoids a CORS preflight the Apps Script Web App doesn't handle;
@@ -44,12 +61,13 @@ export default function ContactPage() {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ name, email: from, org, interest, message, website }),
+        body: JSON.stringify({ name, email: from, org, interest, message, website, turnstileToken }),
       });
       const result = await res.json();
       if (!result.ok) {
         setErrorMessage(result.message || "Something went wrong.");
         setStatus("error");
+        window.turnstile?.reset();
         return;
       }
       setStatus("sent");
@@ -58,9 +76,11 @@ export default function ContactPage() {
       setOrg("");
       setInterest("");
       setMessage("");
+      window.turnstile?.reset();
     } catch {
       setErrorMessage("");
       setStatus("error");
+      window.turnstile?.reset();
     }
   };
 
@@ -69,6 +89,7 @@ export default function ContactPage() {
 
   return (
     <main className="flex-1 bg-[#F1E8DA]">
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" async defer />
       <section className="mx-auto max-w-6xl px-6 py-24 md:px-12 md:py-32">
         <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-black uppercase leading-[0.95] tracking-tight text-navy">
           Contact Us
@@ -169,6 +190,9 @@ export default function ContactPage() {
                 className={`${field} resize-y`}
               />
             </div>
+            {TURNSTILE_SITE_KEY && (
+              <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
+            )}
             <button
               type="submit"
               disabled={status === "sending"}
