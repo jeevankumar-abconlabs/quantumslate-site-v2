@@ -105,14 +105,17 @@ export default function ContactPage() {
             onSubmit={onSubmit}
             className="flex flex-col gap-4 border border-navy/10 bg-navy/[0.03] p-8 md:p-10"
           >
-            {/* Honeypot — hidden from sighted users and screen readers; real bots still fill it */}
+            {/* Honeypot — hidden from sighted users and screen readers; real bots still fill it.
+                autoComplete="one-time-code" (not "off") because Chrome ignores "off" and was
+                autofilling this with the visitor's own email via its grouped-fields heuristic,
+                which made every real submission look like a bot hit. */}
             <input
               type="text"
-              name="website"
+              name="hp_check"
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               tabIndex={-1}
-              autoComplete="off"
+              autoComplete="one-time-code"
               aria-hidden="true"
               className="absolute left-[-9999px] h-0 w-0 opacity-0"
             />
