@@ -1,5 +1,3 @@
-const CLIENT_EMAIL = "jeevankumar06m@gmail.com"; // swap in the client's real inbox
-
 const MIN_SECONDS_BETWEEN_SUBMISSIONS = 30;
 const MAX_SUBMISSIONS_PER_HOUR = 5;
 const MAX_GLOBAL_SUBMISSIONS_PER_HOUR = 30;
@@ -78,9 +76,9 @@ function handleContactSubmission(e) {
   cache.put(countKey, String(count), 3600);
 
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.insertRowBefore(2); // newest submissions go right under the header
+  const row = firstFreeRow(sheet); // oldest on top, newest fills the first free row
 
-  sheet.getRange(2, 2, 1, 6).setValues([[
+  sheet.getRange(row, 2, 1, 6).setValues([[
     new Date(),
     data.name,
     data.email,
@@ -89,28 +87,20 @@ function handleContactSubmission(e) {
     data.message,
   ]]);
 
-  const body = [
-    `New enquiry: ${data.interest || "General enquiry"}`,
-    "",
-    `Name:  ${data.name}`,
-    `Email: ${data.email}`,
-    data.org ? `Org:   ${data.org}` : null,
-    "",
-    "Message:",
-    data.message,
-  ]
-    .filter((line) => line !== null)
-    .join("\n");
-
-  MailApp.sendEmail({
-    to: CLIENT_EMAIL,
-    replyTo: data.email,
-    name: "QuantumSlate Contact Form",
-    subject: `${data.interest} enquiry from ${data.name}`,
-    body: body,
-  });
-
   return jsonResponse();
+}
+
+// getLastRow() counts rows with leftover formatting as occupied even once
+// their content is cleared, which skips real gaps left by deleted test rows.
+// Scan the timestamp column (B) instead and use the first actually-blank one.
+function firstFreeRow(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return 2;
+  const timestamps = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+  for (let i = 0; i < timestamps.length; i++) {
+    if (!timestamps[i][0]) return i + 2;
+  }
+  return lastRow + 1;
 }
 
 function sanitize(value, maxLen) {
