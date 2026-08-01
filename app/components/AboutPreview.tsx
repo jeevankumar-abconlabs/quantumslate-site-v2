@@ -20,13 +20,13 @@ export default function AboutPreview() {
               About Us
             </h2>
             <p className="mt-6 max-w-prose text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-              QuantumSlate is an indigenous aerospace company building drones,
-              autonomous aircraft, and the engineers who fly them. Our hands-on
-              workshops in{" "}
-              <span className="font-medium text-navy">drone technology</span>,{" "}
-              <span className="font-medium text-navy">RC aviation</span>, and{" "}
-              <span className="font-medium text-navy">rocketry</span> turn
-              theory into the real thing.
+              QuantumSlate is an{" "}
+              <span className="font-medium text-navy">EdTech and Defence Technology</span>{" "}
+              company advancing innovation in{" "}
+              <span className="font-medium text-navy">aerospace</span>,{" "}
+              <span className="font-medium text-navy">unmanned systems</span>, and
+              emerging technologies — building future-ready engineers and
+              cutting-edge unmanned solutions for national security.
             </p>
 
             {/* Inline stat row, hairline dividers instead of cards */}
@@ -72,13 +72,13 @@ export default function AboutPreview() {
           />
           <div className="flex flex-col md:order-2">
             <h3 className="text-2xl font-bold leading-snug tracking-tight text-navy md:text-3xl">
-              From Classrooms to the Field
+              EdTech Meets Defence Innovation
             </h3>
             <p className="mt-4 max-w-prose text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-              From unmanned aerial systems and tethered surveillance platforms
-              to aerospace innovation labs in schools and colleges, we design,
-              build, and teach with one goal: technological self-reliance for
-              India.
+              Our EdTech Division runs hands-on workshops in UAV Technologies,
+              Drone Engineering, RC Aircraft, and Rocketry — and our Drone
+              Olympics™ and Aircraft Olympics™ take students from the
+              classroom to national and international competition.
             </p>
             <Link
               href="/about"

@@ -27,57 +27,19 @@ export const metadata: Metadata = {
 // Alternating editorial sections: image left / content right, then flipped.
 const SECTIONS = [
   {
-    heading: "Building the Future of Defence, Aerospace & Autonomous Technologies",
-    image: "/about-us-page/about-us-page-1.webp",
-    alt: "QuantumSlate founder addressing a group of engineering students at an outdoor aerospace session",
-    body: [
-      "QuantumSlate Private Limited is an indigenous aerospace and deep-technology company dedicated to advancing defence capabilities, unmanned systems, and aerospace innovation through engineering excellence and next-generation technology.",
-      "We believe technological self-reliance is the foundation of national security. Our mission is to contribute towards building a stronger, smarter, and more resilient defence ecosystem for India.",
-    ],
-  },
-  {
-    heading: "Aerospace & Deep Technology",
-    image: "/about-us-page/about-us-page-2.webp",
-    alt: "Fleet of hand-built RC aircraft and UAV prototypes lined up on an airfield before flight testing",
-    body: [
-      "Founded by Syed Rayan R, QuantumSlate operates at the intersection of engineering, aerospace research, artificial intelligence, robotics, and real-world operational deployment, designing unmanned systems that bridge the gap between research laboratories and practical field applications.",
-      "Our expertise spans UAV design and manufacturing, aerial robotics, aerospace systems engineering, drone operations, autonomous technologies, and advanced electronics integration.",
-    ],
-  },
-  {
-    heading: "Defence & Strategic Technology",
+    heading: "Defence Division",
     image: "/about-us-page/about-us-page-3.webp",
     alt: "QuantumSlate engineers performing final checks on a fixed-wing UAV before a field demonstration",
     body: [
-      "Defence innovation forms the core of our research and development. We design unmanned aerial systems for surveillance and reconnaissance, tethered drone systems for continuous 24/7 aerial monitoring, autonomous aerial robotics, mission-specific UAV platforms, and AI-assisted aerial intelligence systems.",
-      "From the Adyar Police drone unit to a 24/7 tethered surveillance system for the 96th Field Regiment in Gwalior and an autonomous fixed-wing VTOL aircraft for a Territorial Army base in Jammu & Kashmir, our platforms support government organizations, defence establishments, and emergency response agencies with reliable, indigenous, future-ready solutions.",
+      "Our Defence Division focuses on developing and supplying advanced drones and UAVs for surveillance, reconnaissance, and border security applications. By combining practical education with indigenous defence innovation, QuantumSlate is committed to building future-ready engineers and delivering cutting-edge unmanned solutions for national security.",
     ],
   },
   {
-    heading: "Research, Innovation & Engineering Excellence",
-    image: "/about-us/about-us-general-3.webp",
-    alt: "Student engineering team assembling a quadcopter drone at a QuantumSlate competition booth",
-    body: [
-      "Our multidisciplinary engineering teams work on autonomous flight systems, embedded electronics, flight control, AI and machine vision, drone swarm technologies, robotics and automation, aerospace structures, and mission planning and control.",
-      "The objective is simple: transform complex engineering concepts into scalable, deployable, mission-ready technologies that address modern industrial and defence challenges.",
-    ],
-  },
-  {
-    heading: "Education & Workforce Development",
+    heading: "EdTech Division",
     image: "/about-us/about-us-general-5.webp",
     alt: "Classroom drone workshop with a laser-cut quadcopter and balsa-wood aircraft on the desks",
     body: [
-      "Innovation is sustained by nurturing the next generation of engineers. We invest in aerospace innovation labs, drone training programs, engineering bootcamps, UAV certification programs, research-based learning, and industry-oriented STEM education.",
-      "These programs equip students, researchers, and professionals with hands-on experience in UAV design, avionics, embedded systems, flight operations, and aerospace engineering, bridging the gap between academia and industry.",
-    ],
-  },
-  {
-    heading: "Our Vision & Mission",
-    image: "/about-us/about-us-general-6.webp",
-    alt: "School students building foam aircraft wings during a hands-on QuantumSlate aerospace workshop",
-    body: [
-      "Vision: to become a globally recognized leader in defence innovation, aerospace technologies, and autonomous systems by developing indigenous, intelligent, and sustainable engineering solutions that contribute to national security and technological self-reliance.",
-      "Mission: to engineer advanced aerospace and defence technologies that solve real-world challenges while empowering industries, institutions, and future innovators through research, education, and engineering excellence.",
+      "Through our EdTech Division, we conduct hands-on workshops and training programs in UAV Technologies, Drone Engineering, RC Aircraft, Rocketry, and Aerospace Systems, while collaborating with educational institutions to establish innovation clubs that nurture young engineers. We also organize Drone Olympics™ and Aircraft Olympics™, preparing students to design, build, and compete at national and international levels.",
     ],
   },
 ];
@@ -91,11 +53,9 @@ export default function AboutPage() {
             About Us
           </h1>
           <p className="mt-6 max-w-3xl text-[clamp(0.95rem,1.4vw,1.1rem)] leading-relaxed text-foreground/70">
-            An indigenous aerospace and deep-technology company advancing{" "}
-            <span className="font-medium text-navy">defence capabilities</span>,{" "}
-            <span className="font-medium text-navy">unmanned systems</span>, and{" "}
-            <span className="font-medium text-navy">aerospace education</span>{" "}
-            across India.
+            QuantumSlate Pvt. Ltd. is an EdTech and Defence Technology company
+            dedicated to advancing innovation in aerospace, unmanned systems,
+            and emerging technologies.
           </p>
 
           <div className="mt-16 flex flex-col gap-16 md:gap-24">
@@ -119,13 +79,10 @@ export default function AboutPage() {
                   />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold leading-snug tracking-tight text-navy md:text-3xl">
-                    {s.heading}
-                  </h2>
                   {s.body.map((p) => (
                     <p
                       key={p.slice(0, 32)}
-                      className="mt-4 text-[clamp(0.95rem,1.3vw,1.05rem)] leading-relaxed text-foreground/70"
+                      className="text-[clamp(0.95rem,1.3vw,1.05rem)] leading-relaxed text-foreground/70"
                     >
                       {p}
                     </p>
