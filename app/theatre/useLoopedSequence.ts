@@ -24,9 +24,6 @@ export function useIntroThenLoop(
   remember = false,
 ) {
   const introPlayed = useRef(remember && remembered.has(sheet));
-  // In-flight intro playback, shared across enable/disable cycles so a
-  // scroll-back mid-intro awaits the running play instead of restarting it.
-  const introRun = useRef<Promise<boolean> | null>(null);
   const [introDone, setIntroDone] = useState(introPlayed.current);
 
   useEffect(() => {
@@ -35,23 +32,9 @@ export function useIntroThenLoop(
 
     project.ready.then(async () => {
       if (cancelled) return;
-      if (!introPlayed.current) {
-        if (!introRun.current) {
-          sheet.sequence.position = 0;
-          introRun.current = sheet.sequence
-            .play({ range: [0, introEnd] })
-            .then((finished) => {
-              introRun.current = null;
-              if (finished) {
-                introPlayed.current = true;
-                if (remember) remembered.add(sheet);
-              }
-              return finished;
-            });
-        }
-        const finished = await introRun.current;
-        if (!finished) return;
-      }
+      // ponytail: client dropped the fly-in intro, skip straight to the loop.
+      introPlayed.current = true;
+      if (remember) remembered.add(sheet);
       // Off-screen by the time the intro wrapped up: the sequence rests at
       // introEnd; the loop (and title reveal) start on the next enable.
       if (cancelled) return;
