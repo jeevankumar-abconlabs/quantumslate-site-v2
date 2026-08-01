@@ -1,14 +1,15 @@
 "use client";
 
-// Contact page: a message form (left) that posts to a Google Apps Script
-// Web App (appends a row to a sheet + emails the client), and direct
-// contact details (right).
+// Contact page: a message form (left) that posts to /api/contact, a
+// same-origin proxy that forwards to a Google Apps Script Web App (appends
+// a row to a sheet + emails the client), and direct contact details (right).
+// Posting through our own API route keeps the actual Apps Script URL out of
+// the client bundle/Network tab.
 
 import { useState } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
 
 const EMAIL = "quantumslateofficial@gmail.com";
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
 
 const INTERESTS = [
   "Drone Workshop",
@@ -31,7 +32,6 @@ export default function ContactPage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!FORM_ENDPOINT) return;
     if (website) {
       // bot filled the honeypot — pretend to succeed, don't submit
       setStatus("sent");
@@ -39,9 +39,7 @@ export default function ContactPage() {
     }
     setStatus("sending");
     try {
-      // text/plain avoids a CORS preflight the Apps Script Web App doesn't handle;
-      // it still reads the raw body as JSON on the other side.
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ name, email: from, org, interest, message, website }),
@@ -177,8 +175,17 @@ export default function ContactPage() {
               disabled={status === "sending"}
               className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-bold uppercase tracking-widest text-background transition-colors hover:bg-gold hover:text-navy disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {status === "sending" ? "Sending…" : "Send Message"}
-              <span aria-hidden="true">→</span>
+              {status === "sending" ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <span aria-hidden="true">→</span>
+                </>
+              )}
             </button>
             {status === "sent" && (
               <p className="text-sm font-semibold text-navy">
