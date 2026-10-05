@@ -10,7 +10,7 @@ import { introState } from "../introState";
 // This means the modal shows once per page load but NOT again on SPA
 // route changes within the same load.
 let hasShownThisLoad = false;
-
+//mods in welcome popup
 export default function WelcomeModal() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
