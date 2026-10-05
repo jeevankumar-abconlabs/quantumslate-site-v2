@@ -100,6 +100,8 @@ const JSON_LD = {
   ],
 };
 
+import WelcomeModal from "./components/WelcomeModal";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -115,6 +117,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
         />
+        <WelcomeModal />
         <Navbar />
         {children}
         <Footer />
