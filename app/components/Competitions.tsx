@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 const OLYMPICS_2026 = [
   {
     name: "Drone Olympics",
-    poster: "/olympicsposters/Drone_Olympics_2026.png",
+    poster: "/olympicsposters/Drone_Olympics_2026.webp",
     alt: "Drone Olympics 2026 poster — QuantumSlate presents the national drone flying competition at Velammal Bodhi Campus, Ponneri, Chennai",
     registerHref:
       "https://docs.google.com/forms/d/e/1FAIpQLSdPZydI9ZF_MPhWKVK5F7ye3gHPE6QgT1430LzJLsQfiEKgpw/viewform",
@@ -24,7 +24,7 @@ const OLYMPICS_2026 = [
   },
   {
     name: "Aircraft Olympics",
-    poster: "/olympicsposters/Aircraft_Olympics_2026.png",
+    poster: "/olympicsposters/Aircraft_Olympics_2026.webp",
     alt: "Aircraft Olympics 2026 poster — QuantumSlate presents the national aeromodelling competition at Velammal Bodhi Campus, Ponneri, Chennai",
     registerHref:
       "https://docs.google.com/forms/d/e/1FAIpQLSeITSNuomKNYOVj-UHF15ik0biO_72f8hrFEb4l9_gTfn_Vbg/viewform",

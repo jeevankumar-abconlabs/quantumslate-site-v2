@@ -100,7 +100,7 @@ export default function WelcomeModal() {
         <div className="mt-6 grid grid-cols-2 gap-4">
           <div className="relative aspect-[3/4] overflow-hidden shadow-lg border border-white/10">
             <Image
-              src="/olympicsposters/Drone_Olympics_2026.png"
+              src="/olympicsposters/Drone_Olympics_2026.webp"
               alt="Drone Olympics 2026 Poster"
               fill
               sizes="(max-width: 640px) 40vw, 250px"
@@ -109,7 +109,7 @@ export default function WelcomeModal() {
           </div>
           <div className="relative aspect-[3/4] overflow-hidden shadow-lg border border-white/10">
             <Image
-              src="/olympicsposters/Aircraft_Olympics_2026.png"
+              src="/olympicsposters/Aircraft_Olympics_2026.webp"
               alt="Aircraft Olympics 2026 Poster"
               fill
               sizes="(max-width: 640px) 40vw, 250px"
